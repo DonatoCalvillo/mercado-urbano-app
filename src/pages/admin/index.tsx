@@ -55,7 +55,7 @@ const AuthAdmin = () => {
             <Grid container spacing={2}>
               <Grid item xs={12}>
                 <Typography variant='h1' component="h1">Administrador</Typography>
-                <Typography variant='h3' component="h3">Iniciar sesión</Typography>
+                {/* <Typography variant='h3' component="h3">Iniciar sesión</Typography> */}
                 <Chip
                   label="Credenciales incorrectas"
                   color="error"
@@ -109,6 +109,7 @@ const AuthAdmin = () => {
                 }
                 
               </Grid>
+              <Copyright sx={{ mt: 8, mb: 4 }} />
             </Grid>
           </Box>
         </form>
