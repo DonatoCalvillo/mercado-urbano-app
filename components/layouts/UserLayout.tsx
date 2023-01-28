@@ -1,6 +1,7 @@
 import  Head  from "next/head";
 import { FC, ReactNode } from "react";
 import { Navbar } from '../ui';
+import { Footer } from '../ui/Footer/index';
 
 interface Props {
   children: ReactNode;
@@ -36,9 +37,7 @@ export const UserLayout: FC<Props> = ({ children, title, pageDescription, imageF
         { children }
       </main>
 
-      <footer>
-        
-      </footer>
+      <Footer/>
     </>
   )
 }

@@ -1,6 +1,7 @@
-import { AuthUser } from './auth/index';
+import  AuthUser  from './auth/index';
+import Home from './home';
 
-export default function Home() {
+export default function index() {
   
   const getWeek = () => {
     const day = new Date().getDay();
@@ -13,7 +14,7 @@ export default function Home() {
 
   return (
     <>
-      
+    {/* <Home/> */}
       <AuthUser />
     </>
   )

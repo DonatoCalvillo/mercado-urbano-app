@@ -9,7 +9,7 @@ import { InfoProfile, Zone } from 'components/ui'
 import Tabasco from '../../../public/icons/Tabasco.png';
 import Cardenas from '../../../public/icons/CardenasLogo.png';
 
-const index = () => {
+const UserDashboard = () => {
   return (
     <UserLayout title={'Corredor gastronomico - Home'} pageDescription={'Evento de corredor gastronómico Cárdenas, Tabasco.'}>
         <Container maxWidth="lg">
@@ -20,7 +20,7 @@ const index = () => {
             H. Cárdenas, Tabasco | Parque indendependencia | 18:00 hrs
           </Typography>
           <Box display="flex" alignItems="center" justifyContent="space-between" marginTop="50px">
-            <InfoProfile/>
+            <InfoProfile admin={false}/>
             <Zone />
             <Box>
               <Image src={ Cardenas } alt="puntos" width={150}/>
@@ -31,4 +31,4 @@ const index = () => {
       </UserLayout> 
   )
 }
- export default index
+ export default UserDashboard

@@ -1,9 +1,14 @@
 import { Avatar, Box, Typography } from "@mui/material"
 import Image from 'next/image';
+import { FC } from "react";
 
 import Difuminar from '../../../public/icons/difuminar.png';
 
-export const InfoProfile = () => {
+interface Props {
+  admin: boolean;
+}
+
+export const InfoProfile: FC<Props> = ({ admin }) => {
   return (
     <Box display="flex" alignItems="center" >
       <Avatar alt='Nombre del usaurio' src='' style={{ width: "100px", height: "100px" }}/>
@@ -14,12 +19,18 @@ export const InfoProfile = () => {
         <Typography fontWeight="100" fontStyle="italic" variant="h6" fontSize="20px"  color="#707070">
           #CAR001-G
         </Typography>
-        <Box display="flex" alignItems="center">
-          <Image src={ Difuminar } alt="puntos" width={30}/>
-          <Typography variant="h6" fontSize="20px" fontWeight="100" marginLeft="5px" color="#707070">
-            1860 puntos
-          </Typography>
-        </Box>
+        {
+          !admin &&
+          (
+            <Box display="flex" alignItems="center">
+              <Image src={ Difuminar } alt="puntos" width={30}/>
+              <Typography variant="h6" fontSize="20px" fontWeight="100" marginLeft="5px" color="#707070">
+                1860 puntos
+              </Typography>
+            </Box>
+          )
+        }
+        
       </Box>
     </Box>
   )

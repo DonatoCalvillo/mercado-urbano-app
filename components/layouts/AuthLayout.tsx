@@ -5,8 +5,8 @@ import  Head  from "next/head";
 
 import { Box, Typography } from "@mui/material";
 
-import Tabasco from '../../public/icons/TabascoLogo.png';
 import Cardenas from '../../public/icons/CardenasLogo.png';
+import MercadoUrbano from '../../public/icons/MercadoUrbano.png';
 
 interface Props {
   children: ReactNode;
@@ -47,7 +47,7 @@ export const AuthLayout: FC<Props> = ({ children, title, pageDescription, imageF
         justifyContent="space-between">
         <Box display="flex" flexDirection="row" alignItems="center" >
           <Image src={ Cardenas } alt="puntos" width={150} style={{ marginRight: "30px" }}/>
-          <Image src={ Tabasco } alt="puntos" width={100}/>
+          <Image src={ MercadoUrbano } alt="puntos" width={200}/>
         </Box>
         <Box>
           <Typography variant="h1" fontSize="40px" color="#707070">

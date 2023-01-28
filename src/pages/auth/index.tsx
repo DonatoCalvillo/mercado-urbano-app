@@ -1,4 +1,4 @@
-import { Avatar, Box, Button, Chip, CssBaseline, Grid, TextField, Typography } from '@mui/material';
+import { Box, Button, Chip, Grid, TextField, Typography } from '@mui/material';
 import { useForm } from 'react-hook-form';
 import { AuthLayout } from 'components/layouts/AuthLayout';
 import { ErrorOutline } from '@mui/icons-material';
@@ -19,7 +19,7 @@ function Copyright(props: any) {
   );
 }
 
-export const AuthUser = () => {
+const AuthUser = () => {
 
   const router = useRouter()
 
@@ -109,70 +109,13 @@ export const AuthUser = () => {
                 }
                 
               </Grid>
+              <Copyright sx={{ mt: 8, mb: 4 }} />
             </Grid>
           </Box>
         </form>
       </Box>
-      
-      
-      {/* <div>
-
-      <form onSubmit={ handleSubmit( onLoginuser ) }>
-        <Box flexDirection="column" width="100%" height="100vh" display="flex" alignItems="center" justifyContent="center" style={{ background: '#9D2449' }}>
-        <Container component="main" maxWidth="xs" style={{ background: "#FFFFFf", borderRadius: "10px", boxShadow: "10px 10px 26px 0px rgba(0,0,0,0.75)"  }}>
-          <CssBaseline /> 
-          <Box
-            sx={{
-              marginTop: 8,
-              display: 'flex',
-              flexDirection: 'column',
-              alignItems: 'center',
-            }}
-          >
-            <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
-              <LockOutlinedIcon />
-            </Avatar>
-            <Typography component="h1" variant="h5">
-              Inicia Sesión
-            </Typography>
-            <Box component="form" noValidate sx={{ mt: 1 }}>
-              <TextField
-                margin="normal"
-                required
-                fullWidth
-                id="matricula"
-                label="Matricula"
-                name="matricula"
-                autoComplete="matricula"
-                autoFocus
-              />
-              <TextField
-                margin="normal"
-                required
-                fullWidth
-                name="contraseia"
-                label="Contraseña"
-                type="contraseia"
-                id="contraseia"
-                autoComplete="contraseia"
-              />
-
-              <Button
-                type="submit"
-                fullWidth
-                variant="contained"
-                sx={{ mt: 3, mb: 2 }}
-                style={{ background: "#C8C8C8", padding: "10px" }}
-              >
-                Iniciar sesión
-              </Button>
-            </Box>
-          </Box>
-          <Copyright sx={{ mt: 8, mb: 4 }} />
-        </Container>
-      </Box>
-      </form>
-      </div> */}
     </AuthLayout>
   )
 }
+
+export default AuthUser;
