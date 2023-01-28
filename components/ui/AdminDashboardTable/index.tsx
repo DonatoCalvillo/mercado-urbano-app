@@ -2,29 +2,36 @@ import { Avatar, Box, Button, Typography } from '@mui/material'
 import Image from 'next/image';
 
 import React, { FC } from 'react'
-import ListUsers from '../ListUsers'
+import {ListUsers} from '../ListUsers'
 
 import Difuminar from '../../../public/icons/difuminar.png';
 import HistoryUser from '../HistoryUser';
+import DoNotDisturbOnIcon from '@mui/icons-material/DoNotDisturbOn';
 
 interface Props {
-  selectedUser: boolean
+  selectedUser: boolean,
+  handleSelectedUser: (estado:boolean) => void;
 }
 
-export const AdminDashboardTable: FC<Props>= ({ selectedUser }) => {
+export const AdminDashboardTable: FC<Props>= ({ selectedUser, handleSelectedUser }) => {
   console.log(selectedUser)
   return (
     <Box display="flex">
-    <ListUsers/>
+    <ListUsers handleSelectedUser={handleSelectedUser}/>
     {
       selectedUser ?
       (<Box marginLeft="50px" width="100%">
       <Box display="flex" alignItems="center" width="100%">
         <Avatar alt='Nombre del usaurio' src='' style={{ width: "100px", height: "100px" }}/>
         <Box marginLeft="20px" width="100%">
-          <Typography fontSize="22px" variant="h2" marginTop="10px" color="#707070">
-            Edgar Donato Calvillo Lumbreras
-          </Typography>
+          <Box display="flex" alignItems="center" justifyContent="space-between">
+            <Typography fontSize="22px" variant="h2" marginTop="10px" color="#707070">
+              Edgar Donato Calvillo Lumbreras
+            </Typography>
+            <Box onClick={() => handleSelectedUser(false)}>
+              <DoNotDisturbOnIcon style={{ color: "#F89832", cursor: "pointer" }}/>
+            </Box>
+          </Box>
           <Typography fontWeight="600" fontStyle="italic" fontSize="18px" variant="h2" marginTop="10px" color="#707070">
             #CAR004-G	
           </Typography>

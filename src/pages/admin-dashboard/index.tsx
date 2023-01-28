@@ -14,6 +14,10 @@ import { useState } from 'react';
 const AdminDashboard = () => {
   const [selectedUser, setSelectedUser] = useState(false)
 
+  const handleSelectedUser = (estado:boolean) =>{
+    setSelectedUser(estado)
+  }
+
   return (
     <UserLayout title='Dashboard Administrador' pageDescription='Este es el dashboard para los administradores'>
       <Box minHeight="100vh" display="flex" alignItems="center">
@@ -37,7 +41,7 @@ const AdminDashboard = () => {
               Puntuaciones
             </Typography>
           </Box>
-          <AdminDashboardTable selectedUser={selectedUser}/>
+          <AdminDashboardTable selectedUser={selectedUser} handleSelectedUser={handleSelectedUser}/>
         </Box>
       </Container>
       </Box>

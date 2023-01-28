@@ -7,6 +7,7 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
+import { FC } from 'react';
 
 interface Column {
   id: 'matricula' | 'nombre' | 'puntos';
@@ -54,7 +55,11 @@ const rows = [
   createData('CAR0015-G', 'Nallely Dominique', 1999),
 ];
 
-export default function ListUsers() {
+interface Props {
+  handleSelectedUser: (estado:boolean) => void;
+}
+
+export const ListUsers: FC<Props> = ({ handleSelectedUser }) => {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
@@ -67,9 +72,14 @@ export default function ListUsers() {
     setPage(0);
   };
 
+  const handleClickRow = (e: React.MouseEvent<HTMLElement>) => {
+    console.log((e.target as Element).innerHTML)
+    handleSelectedUser(true)
+  }
+
   return (
-    <Paper sx={{ maxHeight:"500px", minWidth: '500px', overflow: 'hidden' }}>
-      <TableContainer sx={{ maxHeight: 440 }}>
+    <Paper sx={{ maxHeight:"500px", minWidth: '400px', overflow: 'hidden' }}>
+      <TableContainer sx={{ maxHeight: 440, minHeight: 440 }}>
         <Table stickyHeader aria-label="sticky table">
           <TableHead>
             <TableRow>
@@ -88,12 +98,14 @@ export default function ListUsers() {
             {rows
               .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
               .map((row) => {
+                
                 return (
-                  <TableRow hover role="checkbox" tabIndex={-1} key={row.matricula}>
-                    {columns.map((column) => {
+                  <TableRow  hover role="checkbox" tabIndex={-1} key={row.matricula}>
+                    {columns.map((column, index) => {
+                      console.log(index)
                       const value = row[column.id];
                       return (
-                        <TableCell key={column.id} align={column.align}>
+                        <TableCell style={{ cursor: index === 0 ? 'pointer' : '' }} onClick={(e) => index === 0 ? handleClickRow(e) : ""} key={column.id} align={column.align} >
                           {column.format && typeof value === 'number'
                             ? column.format(value)
                             : value}

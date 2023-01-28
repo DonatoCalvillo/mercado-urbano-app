@@ -51,7 +51,7 @@ const rows = [
 
 export default function HistoryUser() {
   const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(3);
+  const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
   const handleChangePage = (event: unknown, newPage: number) => {
     setPage(newPage);
@@ -64,7 +64,7 @@ export default function HistoryUser() {
 
   return (
     <Paper sx={{  width: '100%', overflow: 'hidden' }}>
-      <TableContainer sx={{ maxHeight: 440 }}>
+      <TableContainer sx={{ maxHeight: 260 }}>
         <Table stickyHeader aria-label="sticky table">
           <TableHead>
             <TableRow>
@@ -102,7 +102,7 @@ export default function HistoryUser() {
         </Table>
       </TableContainer>
       <TablePagination
-        rowsPerPageOptions={[3, 25, 50]}
+        rowsPerPageOptions={[10, 25, 50]}
         component="div"
         count={rows.length}
         rowsPerPage={rowsPerPage}
