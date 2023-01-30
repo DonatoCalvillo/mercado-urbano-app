@@ -14,8 +14,8 @@ export default function index() {
 
   return (
     <>
-    {/* <Home/> */}
-      <AuthUser />
+    <Home/>
+      {/* <AuthUser /> */}
     </>
   )
 }
