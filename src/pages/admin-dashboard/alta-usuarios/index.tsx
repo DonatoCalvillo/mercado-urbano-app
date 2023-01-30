@@ -124,7 +124,7 @@ const AltaUsuarios = () => {
                       </Button>
                       <Modal
                         open={open}
-                        onClose={handleClose}
+                        // onClose={handleClose}
                         aria-labelledby="nuevo-usuario"
                         aria-describedby="modal-modal-description"
                       >
@@ -178,6 +178,15 @@ const AltaUsuarios = () => {
                             <Typography fontWeight="100" id="modal-modal-description" sx={{ mt: 2 }}>
                               9371194962
                             </Typography>
+                            
+                          </Box>
+                          <Box marginTop="20px" display="flex" justifyContent="space-between">
+                            <Button style={{ marginRight: "10px" }} onClick={handleClose} color='success' variant="outlined" type='submit' size='large' fullWidth>
+                              IMPRIMIR
+                            </Button>
+                            <Button onClick={handleClose} color='error' variant="outlined" type='submit' size='large' fullWidth>
+                              CERRAR
+                            </Button>
                           </Box>
                         </Box>
                       </Modal>
