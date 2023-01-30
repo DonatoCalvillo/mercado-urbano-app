@@ -1,6 +1,21 @@
 import { AppBar, Box, Button, Container, Toolbar, Typography } from '@mui/material';
+import Link from 'next/link';
 
-const navItems = ['Inicio', 'Dar de alta', 'Reportes'];
+// const navItems = ['Inicio', 'Dar de alta','Subir puntuacion', 'Reportes' ];
+const navItems =[
+  {
+    name: 'Inicio',
+    url: '/admin-dashboard'
+  },
+  {
+    name: 'Dar de alta',
+    url: '/admin-dashboard/alta-usuarios'
+  },
+  {
+    name: 'Subir puntuacion',
+    url: '/admin-dashboard/subir-puntuacion'
+  }
+]
 
 export const Navbar = () => {
   return (
@@ -8,11 +23,11 @@ export const Navbar = () => {
       <Toolbar >
         <Container>
           <Box display="flex" justifyContent="space-between">
-            <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
-              {navItems.map((item) => (
-                <Button key={item} sx={{ color: '#fff', background: "none", fontSize:"16px", fontWeight: "100" }}>
-                  {item}
-                </Button>
+            <Box sx={{ display: { xs: 'none', sm: 'flex', alignItems: "center" } }}>
+              {navItems.map((item, index) => (
+                <Link href={item.url} key={index} style={{ color: '#fff', background: "none", fontSize:"16px", fontWeight: "100", textDecoration: "none", marginRight: "10px", padding: "0"}}>
+                  {item.name}
+                </Link>
               ))}
             </Box>
             <Box display="flex" >  
