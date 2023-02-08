@@ -25,7 +25,7 @@ function Copyright(props: any) {
 const AuthAdmin = () => {
 
   const router = useRouter()
-  const { login } = useContext( AuthContext )
+  const { loginAdmin } = useContext( AuthContext )
   const { register, handleSubmit, formState: { errors } } = useForm<FormData>()
   const [showError, setShowError] = useState(false)
   const [blockButton, setBlockButton] = useState(false)
@@ -34,7 +34,7 @@ const AuthAdmin = () => {
     
     setShowError(false)
 
-    const isValidLogin = await login(matricula, contrasenia)
+    const isValidLogin = await loginAdmin(matricula, contrasenia)
 
     if( !isValidLogin ){
       setShowError(true)
@@ -44,7 +44,7 @@ const AuthAdmin = () => {
       return
     }
 
-    router.replace('/')
+    router.replace('/admin-dashboard')
   }
 
   return (

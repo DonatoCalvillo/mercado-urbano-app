@@ -1,132 +1,151 @@
 import * as React from 'react';
-import Paper from '@mui/material/Paper';
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
-import TablePagination from '@mui/material/TablePagination';
-import TableRow from '@mui/material/TableRow';
-import { FC } from 'react';
+import { DataGrid, GridColDef, GridRowId } from '@mui/x-data-grid';
+import { IUsuarioListado } from 'interfaces';
+import { FC, useState } from 'react';
+import { Avatar, Box, Button, Modal, Typography } from '@mui/material';
+import {makeStyles} from '@mui/styles'
+import DoNotDisturbOnIcon from '@mui/icons-material/DoNotDisturbOn';
 
-interface Column {
-  id: 'matricula' | 'nombre' | 'puntos';
-  label: string;
-  minWidth?: number;
-  align?: 'right';
-  format?: (value: number) => string;
-}
+import HistoryUser from '../HistoryUser';
+import Image from 'next/image';
 
-const columns: readonly Column[] = [
-  { id: 'matricula', label: 'Matricula', minWidth: 100 },
-  { id: 'nombre', label: 'Nombre', minWidth: 100 },
-  { id: 'puntos', label: 'Puntos', minWidth: 100, align: 'right' }
+
+import Difuminar from '../../../public/icons/difuminar.png';
+
+const columns: GridColDef[] = [
+  { field: 'matricula', headerName: 'Matricula', width: 200 },
+  { field: 'apellido_paterno', headerName: 'Apellido Paterno', width: 200 },
+  { field: 'apellido_materno', headerName: 'Apellido Materno', width: 200 },
+  { field: 'nombre', headerName: 'Nombre', width: 200 },
+  { field: 'puntos', headerName: 'Puntos', width: 200 },
 ];
 
-interface Data {
-  matricula: string;
-  nombre: string;
-  puntos: number;
-}
-
-function createData(
-  matricula: string,
-  nombre: string,
-  puntos: number,
-): Data {
-  return { matricula, nombre, puntos };
-}
-
-const rows = [
-  createData('CAR001-G',  'Nallely Dominique', 1999),
-  createData('CAR002-G',  'Nallely Dominique', 1999),
-  createData('CAR003-G',  'Nallely Dominique', 1999),
-  createData('CAR004-G',  'Nallely Dominique', 1999),
-  createData('CAR005-G',  'Nallely Dominique', 1999),
-  createData('CAR006-G',  'Nallely Dominique', 1999),
-  createData('CAR007-G',  'Nallely Dominique', 1999),
-  createData('CAR008-G',  'Nallely Dominique', 1999),
-  createData('CAR009-G',  'Nallely Dominique', 1999),
-  createData('CAR0010-G', 'Nallely Dominique', 1999),
-  createData('CAR0011-G', 'Nallely Dominique', 1999),
-  createData('CAR0012-G', 'Nallely Dominique', 1999),
-  createData('CAR0013-G', 'Nallely Dominique', 1999),
-  createData('CAR0014-G', 'Nallely Dominique', 1999),
-  createData('CAR0015-G', 'Nallely Dominique', 1999),
-];
+const useStyles:any = makeStyles(() => ({
+  root: {
+    "& .MuiDataGrid-columnHeaderCheckbox .MuiDataGrid-columnHeaderTitleContainer": {
+      display: "none"
+    }
+  }
+}));
 
 interface Props {
   handleSelectedUser: (estado:boolean) => void;
+  usuarios: IUsuarioListado[];
 }
 
-export const ListUsers: FC<Props> = ({ handleSelectedUser }) => {
-  const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(10);
+export const ListUsers:FC<Props> = ({ usuarios }) => {
+  const [selectionModel, setSelectionModel] = useState<GridRowId[]>([]);
+  const [selectedUser, setSelectedUser] = useState<IUsuarioListado>();
+  
+  const classes = useStyles();
 
-  const handleChangePage = (event: unknown, newPage: number) => {
-    setPage(newPage);
-  };
-
-  const handleChangeRowsPerPage = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setRowsPerPage(+event.target.value);
-    setPage(0);
-  };
-
-  const handleClickRow = (e: React.MouseEvent<HTMLElement>) => {
-    console.log((e.target as Element).innerHTML)
-    handleSelectedUser(true)
-  }
-
+  const [open, setOpen] = React.useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+  
   return (
-    <Paper sx={{ maxHeight:"500px", minWidth: '400px', overflow: 'hidden' }}>
-      <TableContainer sx={{ maxHeight: 440, minHeight: 440 }}>
-        <Table stickyHeader aria-label="sticky table">
-          <TableHead>
-            <TableRow>
-              {columns.map((column) => (
-                <TableCell
-                  key={column.id}
-                  align={column.align}
-                  style={{ minWidth: column.minWidth }}
-                >
-                  {column.label}
-                </TableCell>
-              ))}
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {rows
-              .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-              .map((row) => {
-                
-                return (
-                  <TableRow  hover role="checkbox" tabIndex={-1} key={row.matricula}>
-                    {columns.map((column, index) => {
-                      console.log(index)
-                      const value = row[column.id];
-                      return (
-                        <TableCell style={{ cursor: index === 0 ? 'pointer' : '' }} onClick={(e) => index === 0 ? handleClickRow(e) : ""} key={column.id} align={column.align} >
-                          {column.format && typeof value === 'number'
-                            ? column.format(value)
-                            : value}
-                        </TableCell>
-                      );
-                    })}
-                  </TableRow>
-                );
-              })}
-          </TableBody>
-        </Table>
-      </TableContainer>
-      <TablePagination
-        rowsPerPageOptions={[10, 25, 50]}
-        component="div"
-        count={rows.length}
-        rowsPerPage={rowsPerPage}
-        page={page}
-        onPageChange={handleChangePage}
-        onRowsPerPageChange={handleChangeRowsPerPage}
-      />
-    </Paper>
+    <>
+      <Box display="flex" justifyContent="center" flexDirection="column" width="100%">
+        <div style={{ height: 400, width: '100%' }}>
+          <DataGrid
+            className={classes.root}
+            rows={usuarios.map((usuario, index) => { return {id: usuario.matricula, ...usuario} })}
+            columns={columns}
+            pageSize={10}
+            rowsPerPageOptions={[10]}
+            checkboxSelection
+            selectionModel={selectionModel}
+            hideFooterSelectedRowCount
+            onSelectionModelChange={(selection) => {
+              console.log(selection)
+              if (selection.length > 1) {
+                const selectionSet = new Set(selectionModel);
+                const result = selection.filter((s) => !selectionSet.has(s));
+                setSelectionModel(result);
+              } else {
+                setSelectionModel(selection);
+              }
+            }}
+          />
+        </div>
+        <Box display="flex" justifyContent="right">
+          <Button style={{
+            width: "150px",
+            marginTop:"50px",
+            padding: "10px"
+          }}
+            variant="outlined" color='success' 
+            // onClick={handleOpen}
+            onClick={() => {
+              const _selectedUser = usuarios.find( usuario => usuario.matricula === selectionModel.toString())
+              setSelectedUser(_selectedUser)
+              handleOpen()
+            }}
+          >
+            Ver detalle  
+          </Button>
+        </Box>
+      </Box>
+      <Modal
+        open={open}
+        // onClose={handleClose}
+        aria-labelledby="nuevo-usuario"
+        aria-describedby="modal-modal-description"
+      >
+        <Box 
+          position="absolute" 
+          top="50%" left="50%" 
+          width="1500px"
+          style={{ transform: "translate(-50%, -50%)",
+          boxShadow: "24",
+          background: "#ffffff",
+          padding: "50px" }}>
+          <Box display="flex" alignItems="center" width="100%">
+        <Avatar alt='Nombre del usaurio' src='' style={{ width: "100px", height: "100px" }}/>
+        <Box marginLeft="20px" width="100%">
+          <Box display="flex" alignItems="center" justifyContent="space-between">
+            <Typography fontSize="22px" variant="h2" marginTop="10px" color="#707070">
+              {`${selectedUser?.apellido_paterno} ${selectedUser?.apellido_materno} ${selectedUser?.nombre}`}
+            </Typography>
+            <Box onClick={() => handleClose()}>
+              <DoNotDisturbOnIcon style={{ color: "#F89832", cursor: "pointer" }}/>
+            </Box>
+          </Box>
+          <Typography fontWeight="600" fontStyle="italic" fontSize="18px" variant="h2" marginTop="10px" color="#707070">
+            #{selectedUser?.matricula}
+          </Typography>
+          <Box display="flex" alignItems="center">
+            <Image src={ Difuminar } alt="puntos" width={30}/>
+            <Typography variant="h6" fontSize="20px" fontWeight="100" marginLeft="5px" color="#707070">
+              {selectedUser?.puntos} puntos
+            </Typography>
+          </Box>
+          <Box display="flex" width="100%" justifyContent="space-between">
+            <Typography fontWeight="100" fontSize="16px" variant="h3" marginTop="10px" color="#707070">
+              {selectedUser?.correo}
+            </Typography>
+            <Typography fontWeight="100" fontSize="16px" variant="h3" marginTop="10px" color="#707070">
+              {selectedUser?.telefono}
+            </Typography>
+          </Box>
+          </Box>
+        </Box>
+        <Box display="flex" justifyContent="right" marginTop="20px">
+          <Button color='error' variant="outlined" style={{ }}>
+            Eliminar
+          </Button>
+        </Box>
+        <HistoryUser/>
+          {/* <Box marginTop="20px" display="flex" justifyContent="space-between">
+            <Button style={{ marginRight: "10px" }} onClick={handleClose} color='success' variant="outlined" type='submit' size='large' fullWidth>
+              IMPRIMIR
+            </Button>
+            <Button onClick={handleClose} color='error' variant="outlined" type='submit' size='large' fullWidth>
+              CERRAR
+            </Button>
+          </Box> */}
+        </Box>
+      </Modal>
+    </>
   );
 }

@@ -3,7 +3,7 @@ import { Box, FormControl, InputLabel, MenuItem, Select, Typography } from "@mui
 import Button from "@mui/material/Button";
 
 export const Zone = () => {
-  const [status, setStatus] = useState("Registro")
+  const [status, setStatus] = useState("Inscrito")
 
   const registerZone = () => {
     setStatus("")
@@ -30,7 +30,7 @@ export const Zone = () => {
             <Typography variant="h6" color="#707070" textAlign="center" marginBottom="20px">
               El registro te toca el jueves 13 de enero a partir de las 03:00 a.m.
             </Typography>
-            <Button variant="outlined" style={{ padding: "10px 20px", color: "#707070", borderColor: "#707070" }}>Inscribirse</Button>
+            <Button variant="outlined" style={{ padding: "10px 20px", color: "#707070", borderColor: "#707070" }}>Reservar</Button>
           </Box>
          )
       }

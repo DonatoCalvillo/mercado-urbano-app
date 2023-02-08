@@ -7,18 +7,22 @@ import {ListUsers} from '../ListUsers'
 import Difuminar from '../../../public/icons/difuminar.png';
 import HistoryUser from '../HistoryUser';
 import DoNotDisturbOnIcon from '@mui/icons-material/DoNotDisturbOn';
+import { useEffect, useState } from 'react';
+import { mercadoUrbanoApi } from 'api';
+import { IUsuarioListado } from '../../../interfaces/IUsuario';
 
 interface Props {
-  selectedUser: boolean,
+  selectedUser: boolean;
+  usuarios: IUsuarioListado[];
   handleSelectedUser: (estado:boolean) => void;
 }
 
-export const AdminDashboardTable: FC<Props>= ({ selectedUser, handleSelectedUser }) => {
-  console.log(selectedUser)
+export const AdminDashboardTable: FC<Props>= ({ usuarios, selectedUser, handleSelectedUser }) => {
+  console.log(usuarios)
   return (
     <Box display="flex">
-    <ListUsers handleSelectedUser={handleSelectedUser}/>
-    {
+    <ListUsers usuarios={usuarios} handleSelectedUser={handleSelectedUser}/>
+    {/* {
       selectedUser ?
       (<Box marginLeft="50px" width="100%">
       <Box display="flex" alignItems="center" width="100%">
@@ -64,7 +68,7 @@ export const AdminDashboardTable: FC<Props>= ({ selectedUser, handleSelectedUser
         Seleccione un usuario para ver su información
             </Typography>
       </Box>)
-    }
+    } */}
     
   </Box>
   )

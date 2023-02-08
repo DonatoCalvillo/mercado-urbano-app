@@ -9,14 +9,21 @@ import MU3 from '../../../public/images/MU-3.jpg'
 import MU4 from '../../../public/images/MU-4.jpg'
 import MU5 from '../../../public/images/MU-5.jpg'
 
+import MercadoUrbano from '../../../public/icons/MercadoUrbano.png';
+import Cardenas from '../../../public/icons/CardenasLogo.png';
+
 const Home = () => {
   return (
     <UserLayout title='Inicio' pageDescription='Página de inicio para el programa del Mercado urbano.'>
-      <Box marginTop="50px" minHeight="100vh" display="flex" alignItems="center">
+      <Box marginTop="100px" minHeight="100vh">
         <Container  maxWidth="lg">
           <Typography variant="h1" marginBottom="50px" color="#707070">
             Iniciativa: Mercado de progreso y bienestar
           </Typography>
+          <Box marginBottom="50px" display="flex" justifyContent="center" alignItems="end">
+            <Image style={{marginRight: "50px"}} src={ Cardenas } alt="puntos" width={150}/>
+            <Image src={ MercadoUrbano } alt="puntos" width={200}/>
+          </Box>
           <Box
             sx={{
               maxWidth: '100%',

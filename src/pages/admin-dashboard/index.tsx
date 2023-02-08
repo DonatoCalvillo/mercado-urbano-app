@@ -10,8 +10,16 @@ import Cardenas from '../../../public/icons/CardenasLogo.png';
 
 import { AdminDashboardTable } from 'components/ui/AdminDashboardTable';
 import { useState } from 'react';
+import { GetStaticProps, NextPage } from 'next';
+import { mercadoUrbanoApi } from 'api';
+import { IUsuarioListado } from '../../../interfaces/IUsuario';
 
-const AdminDashboard = () => {
+interface Props {
+  usuarios: IUsuarioListado[];
+}
+
+const AdminDashboard: NextPage<Props> = ({usuarios}) => {
+  // console.log({usuarios})
   const [selectedUser, setSelectedUser] = useState(false)
 
   const handleSelectedUser = (estado:boolean) =>{
@@ -41,12 +49,23 @@ const AdminDashboard = () => {
               Puntuaciones
             </Typography>
           </Box>
-          <AdminDashboardTable selectedUser={selectedUser} handleSelectedUser={handleSelectedUser}/>
+          <AdminDashboardTable usuarios={usuarios} selectedUser={selectedUser} handleSelectedUser={handleSelectedUser}/>
         </Box>
       </Container>
       </Box>
     </UserLayout>
   )
+}
+
+export const getStaticProps: GetStaticProps = async (ctx) => {
+  const {data} = await mercadoUrbanoApi.get<IUsuarioListado>('/user/getAll?limit=100')
+  // console.log(data)
+
+  return {
+    props: {
+      usuarios: data
+    }
+  }
 }
 
 export default AdminDashboard

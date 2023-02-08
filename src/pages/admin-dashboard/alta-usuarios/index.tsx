@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { UserLayout } from 'components/layouts';
-import { Box, Button, Chip, Container, Grid, Modal, TextField, Typography } from '@mui/material';
+import { Box, Button, Chip, Container, FormControl, FormHelperText, Grid, InputLabel, MenuItem, Modal, Select, TextField, Typography } from '@mui/material';
 import { useForm } from 'react-hook-form';
 import { ErrorOutline } from '@mui/icons-material';
 import Image from 'next/image';
@@ -12,7 +12,10 @@ type FormData = {
   apellido_paterno: string;
   apellido_materno: string;
   correo: string;
+  contrasenia: string;
   telefono: string;
+  area: string;
+  rol: string;
 }
 
 const AltaUsuarios = () => {
@@ -30,15 +33,15 @@ const AltaUsuarios = () => {
 
   return (
     <UserLayout title='Dar de alta usuario' pageDescription='Página usada para dar de alta usuarios nuevos para el programa del Mercado urbano.'>
-      <Box minHeight="100vh" display="flex" alignItems="center">
+      <Box minHeight="100vh" marginTop="100px">
         <Container maxWidth="lg">
           <Typography variant="h1" marginTop="50px" color="#707070">
             Dar de alta
           </Typography>
           <Box display="flex" alignItems="center">
-            <Box width="40%">
+            <Box minWidth="70%">
               <form onSubmit={ handleSubmit(onLoginuser) } noValidate style={{ background: "#ffffff", borderRadius: "10px", padding: "20px" }}>
-                <Box sx={{ width: 350, padding: '10px 20px' }}>
+                <Box sx={{ width: 350 }}>
                   <Grid container spacing={2}>
                     <Grid item xs={12}>
                       <Typography fontSize="16px" variant='h3' component="h3">Usuario</Typography>
@@ -108,6 +111,21 @@ const AltaUsuarios = () => {
 
                     <Grid item xs={12}>
                       <TextField 
+                      label="Contraseña*" 
+                      type="password" 
+
+                      variant='filled' 
+                      fullWidth
+                      { ...register('contrasenia',{
+                        required: 'Este campo es requerido.',
+                      })}
+                      error = { !!errors.contrasenia }
+                      helperText = { errors.contrasenia?.message } 
+                    />
+                    </Grid>
+
+                    <Grid item xs={12}>
+                      <TextField 
                       label="Telefono" 
                       variant='filled' 
                       fullWidth
@@ -116,6 +134,29 @@ const AltaUsuarios = () => {
                       error = { !!errors.telefono }
                       helperText = { errors.telefono?.message } 
                     />
+                    </Grid>
+
+                    <Grid item xs={12} >
+                      <FormControl fullWidth>
+                        <InputLabel 
+                          id="area-label"
+                          { ...register('area',{
+                            required: true
+                          })}
+                          error = { !!errors.area }
+                        >Área*</InputLabel>
+                        <Select
+                          fullWidth
+                          labelId="area-label"
+                          id="area-label"
+                          label="Zona"
+                         
+                        >
+                          <MenuItem value={10}>Gastronómico</MenuItem>
+                          <MenuItem value={20}>Comercio</MenuItem>
+                        </Select>
+                        {errors.area && <FormHelperText>Este campo es requerido.</FormHelperText>}
+                      </FormControl>
                     </Grid>
 
                     <Grid item xs={12}>

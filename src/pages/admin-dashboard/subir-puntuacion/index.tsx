@@ -5,7 +5,6 @@ import { useState } from 'react';
 
 const CargaArchivos = () => {
    const  handleInput = async (e:any) =>{
-    console.log(e)
   }
 
   const [uploading, setUploading] = useState(false);

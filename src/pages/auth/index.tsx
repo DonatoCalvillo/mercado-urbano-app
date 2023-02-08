@@ -44,7 +44,7 @@ const AuthUser = () => {
       return
     }
 
-    router.replace('/')
+    router.replace('/user-dashboard')
     
   }
 
