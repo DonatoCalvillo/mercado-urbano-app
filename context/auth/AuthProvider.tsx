@@ -95,6 +95,8 @@ export const AuthProvider: FC<Props> = ({ children }) => {
         correo,
         telefono,
       })
+      const { usuario } = data
+
     } catch (error) {
       
     }

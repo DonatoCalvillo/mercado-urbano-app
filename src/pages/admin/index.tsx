@@ -1,13 +1,10 @@
-import { Avatar, Box, Button, Chip, CssBaseline, Grid, TextField, Typography } from '@mui/material';
-import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
+import { Avatar, Box, Button, Chip, Grid, TextField, Typography } from '@mui/material';
 import { useForm } from 'react-hook-form';
 import { AuthLayout } from 'components/layouts/AuthLayout';
-import mercadoUrbanoApi from '../../../api/mercadoUrbanoApi';
 import { ErrorOutline } from '@mui/icons-material';
 import { useContext, useState } from 'react';
 import { AuthContext } from '../../../context/auth/AuthContext';
 import { useRouter } from 'next/router';
-import index from '../user-dashboard';
 
 type FormData = {
   matricula: string;
@@ -55,7 +52,6 @@ const AuthAdmin = () => {
             <Grid container spacing={2}>
               <Grid item xs={12}>
                 <Typography variant='h1' component="h1">Administrador</Typography>
-                {/* <Typography variant='h3' component="h3">Iniciar sesión</Typography> */}
                 <Chip
                   label="Credenciales incorrectas"
                   color="error"

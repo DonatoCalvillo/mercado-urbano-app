@@ -1,11 +1,15 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { UserLayout } from 'components/layouts';
 import { Box, Button, Chip, Container, FormControl, FormHelperText, Grid, InputLabel, MenuItem, Modal, Select, TextField, Typography } from '@mui/material';
-import { useForm } from 'react-hook-form';
+import { set, useForm } from 'react-hook-form';
 import { ErrorOutline } from '@mui/icons-material';
 import Image from 'next/image';
 
 import SignIn from '../../../../public/icons/signin.svg';
+import { IUsuarioRegistro } from 'interfaces';
+import { mercadoUrbanoApi } from 'api';
+import axios from 'axios';
+import { IUsuarioNuevo } from '../../../../interfaces/IUsuario';
 
 type FormData = {
   nombre: string;
@@ -27,9 +31,50 @@ const AltaUsuarios = () => {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
-  const onLoginuser = async (  ) => {
+  //Datos
+  const [userData, setUserData] = useState<IUsuarioRegistro>({
+    nombre:           '',
+    apellido_paterno: '',
+    apellido_materno: '',
+    correo:           '',
+    contrasenia:      '',
+    telefono:         '',
+    area:             ''
+  })
+  const [newUser, setNewUser] = useState<IUsuarioNuevo>({
+    nombre:           '',
+    apellido_paterno: '',
+    apellido_materno: '',
+    correo:           '',
+    telefono:         '',
+    area:             '',
+    matricula:        ''
+  })
+  
+  const createUser = async (event:any) => {
+    handleOpen()
+    try{
+      const { area, ...newUser } = userData
+      const { data } = await mercadoUrbanoApi.post('/auth/register', {...newUser, fk_area: area })
+      if(data.status == 400)
+        console.log(data.message)
 
+      setNewUser(data.newUser)
+    }catch(error){
+      if( axios.isAxiosError(error) )
+        console.log(error.response?.data.message)
+
+      // console.log(error)
+    }
   }
+
+  const handleInputChange = (event:any) => {
+    setUserData({
+        ...userData,
+        [event.target.name] : event.target.value
+    })
+  }
+
 
   return (
     <UserLayout title='Dar de alta usuario' pageDescription='Página usada para dar de alta usuarios nuevos para el programa del Mercado urbano.'>
@@ -40,7 +85,7 @@ const AltaUsuarios = () => {
           </Typography>
           <Box display="flex" alignItems="center">
             <Box minWidth="70%">
-              <form onSubmit={ handleSubmit(onLoginuser) } noValidate style={{ background: "#ffffff", borderRadius: "10px", padding: "20px" }}>
+              <form onSubmit={ handleSubmit(createUser) } noValidate style={{ background: "#ffffff", borderRadius: "10px", padding: "20px" }}>
                 <Box sx={{ width: 350 }}>
                   <Grid container spacing={2}>
                     <Grid item xs={12}>
@@ -64,6 +109,7 @@ const AltaUsuarios = () => {
                         })} 
                         error = { !!errors.nombre } 
                         helperText = { errors.nombre?.message } 
+                        onChange={handleInputChange}
                       />
                     </Grid>
 
@@ -78,6 +124,7 @@ const AltaUsuarios = () => {
                       })}
                       error = { !!errors.apellido_paterno }
                       helperText = { errors.apellido_paterno?.message } 
+                      onChange={handleInputChange}
                     />
                     </Grid>
 
@@ -92,6 +139,7 @@ const AltaUsuarios = () => {
                       })}
                       error = { !!errors.apellido_materno }
                       helperText = { errors.apellido_materno?.message } 
+                      onChange={handleInputChange}
                     />
                     </Grid>
                     
@@ -106,6 +154,7 @@ const AltaUsuarios = () => {
                       })}
                       error = { !!errors.correo }
                       helperText = { errors.correo?.message } 
+                      onChange={handleInputChange}
                     />
                     </Grid>
 
@@ -121,6 +170,7 @@ const AltaUsuarios = () => {
                       })}
                       error = { !!errors.contrasenia }
                       helperText = { errors.contrasenia?.message } 
+                      onChange={handleInputChange}
                     />
                     </Grid>
 
@@ -133,6 +183,7 @@ const AltaUsuarios = () => {
                       })}
                       error = { !!errors.telefono }
                       helperText = { errors.telefono?.message } 
+                      onChange={handleInputChange}
                     />
                     </Grid>
 
@@ -140,97 +191,35 @@ const AltaUsuarios = () => {
                       <FormControl fullWidth>
                         <InputLabel 
                           id="area-label"
-                          { ...register('area',{
-                            required: true
-                          })}
-                          error = { !!errors.area }
+                          // { ...register('area',{
+                          //   required: true
+                          // })}
+                          // error = { !!errors.area }
+                          onChange={handleInputChange}
                         >Área*</InputLabel>
                         <Select
                           fullWidth
                           labelId="area-label"
                           id="area-label"
                           label="Zona"
-                         
+                          { ...register('area',{
+                            required: true
+                          })}
+                          error = { !!errors.area }
+                         onChange={handleInputChange}
                         >
-                          <MenuItem value={10}>Gastronómico</MenuItem>
-                          <MenuItem value={20}>Comercio</MenuItem>
+                          <MenuItem value='Gastronomia'>Gastronomía</MenuItem>
+                          <MenuItem value='Comercio'>Comercio</MenuItem>
                         </Select>
                         {errors.area && <FormHelperText>Este campo es requerido.</FormHelperText>}
                       </FormControl>
                     </Grid>
 
                     <Grid item xs={12}>
-                      <Button onClick={handleOpen} color='success' variant="outlined" type='submit' size='large' fullWidth>
+                      <Button color='success' variant="outlined" type='submit' size='large' fullWidth>
                         Registrar
                       </Button>
-                      <Modal
-                        open={open}
-                        // onClose={handleClose}
-                        aria-labelledby="nuevo-usuario"
-                        aria-describedby="modal-modal-description"
-                      >
-                        <Box 
-                          position="absolute" 
-                          top="50%" left="50%" 
-                          width="500px"
-                          style={{ transform: "translate(-50%, -50%)",
-                          boxShadow: "24",
-                          background: "#ffffff",
-                          padding: "50px" }}>
-                          <Typography  id="modal-modal-title" variant="h6" component="h2">
-                            Usuario generado
-                          </Typography>
-                          <Box display="flex" justifyContent="space-between">
-                            <Typography marginRight="10px" fontWeight="500" id="modal-modal-description" sx={{ mt: 2 }}>
-                              Nombre:
-                            </Typography>
-                            <Typography fontWeight="100" id="modal-modal-description" sx={{ mt: 2 }}>
-                              Edgar Donato Calvillo Lumbreras
-                            </Typography>
-                          </Box>
-                          <Box display="flex" justifyContent="space-between">
-                            <Typography marginRight="10px" fontWeight="500" id="modal-modal-description" sx={{ mt: 2 }}>
-                              Matricula:
-                            </Typography>
-                            <Typography fontWeight="100" id="modal-modal-description" sx={{ mt: 2 }}>
-                            CAR001-C
-                            </Typography>
-                          </Box>
-                          <Box display="flex" justifyContent="space-between">
-                            <Typography marginRight="10px" fontWeight="500" id="modal-modal-description" sx={{ mt: 2 }}>
-                              Contraseña:
-                            </Typography>
-                            <Typography fontWeight="100" id="modal-modal-description" sx={{ mt: 2 }}>
-                              sdf12s5dfis4co1
-                            </Typography>
-                          </Box>
-                          <Box display="flex" justifyContent="space-between">
-                            <Typography marginRight="10px" fontWeight="500" id="modal-modal-description" sx={{ mt: 2 }}>
-                              Correo:
-                            </Typography>
-                            <Typography fontWeight="100" id="modal-modal-description" sx={{ mt: 2 }}>
-                              edgar_donato@outlook.com
-                            </Typography>
-                          </Box>
-                          <Box display="flex" justifyContent="space-between">
-                            <Typography marginRight="10px" fontWeight="500" id="modal-modal-description" sx={{ mt: 2 }}>
-                              Telefono:
-                            </Typography>
-                            <Typography fontWeight="100" id="modal-modal-description" sx={{ mt: 2 }}>
-                              9371194962
-                            </Typography>
-                            
-                          </Box>
-                          <Box marginTop="20px" display="flex" justifyContent="space-between">
-                            <Button style={{ marginRight: "10px" }} onClick={handleClose} color='success' variant="outlined" type='submit' size='large' fullWidth>
-                              IMPRIMIR
-                            </Button>
-                            <Button onClick={handleClose} color='error' variant="outlined" type='submit' size='large' fullWidth>
-                              CERRAR
-                            </Button>
-                          </Box>
-                        </Box>
-                      </Modal>
+                     
                     </Grid>
                   </Grid>
                 </Box>
@@ -242,6 +231,74 @@ const AltaUsuarios = () => {
           </Box>
         </Container>
       </Box>
+      <Modal
+        open={open}
+        // onClose={handleClose}
+        aria-labelledby="nuevo-usuario"
+        aria-describedby="modal-modal-description"
+      >
+        <Box 
+          position="absolute" 
+          top="50%" left="50%" 
+          width="500px"
+          style={{ transform: "translate(-50%, -50%)",
+          boxShadow: "24",
+          background: "#ffffff",
+          padding: "50px" }}>
+          <Typography  id="modal-modal-title" variant="h6" component="h2">
+            Usuario generado
+          </Typography>
+          <Box display="flex" justifyContent="space-between">
+            <Typography marginRight="10px" fontWeight="500" id="modal-modal-description" sx={{ mt: 2 }}>
+              Nombre:
+            </Typography>
+            <Typography fontWeight="100" id="modal-modal-description" sx={{ mt: 2 }}>
+              {`${newUser.nombre} ${newUser.apellido_paterno} ${newUser.apellido_materno}`}
+            </Typography>
+          </Box>
+          <Box display="flex" justifyContent="space-between">
+            <Typography marginRight="10px" fontWeight="500" id="modal-modal-description" sx={{ mt: 2 }}>
+              Matricula:
+            </Typography>
+            <Typography fontWeight="100" id="modal-modal-description" sx={{ mt: 2 }}>
+              #{newUser.matricula}
+            </Typography>
+          </Box>
+          <Box display="flex" justifyContent="space-between">
+            <Typography marginRight="10px" fontWeight="500" id="modal-modal-description" sx={{ mt: 2 }}>
+              Área:
+            </Typography>
+            <Typography fontWeight="100" id="modal-modal-description" sx={{ mt: 2 }}>
+              {newUser.area}
+            </Typography>
+          </Box>
+          <Box display="flex" justifyContent="space-between">
+            <Typography marginRight="10px" fontWeight="500" id="modal-modal-description" sx={{ mt: 2 }}>
+              Correo:
+            </Typography>
+            <Typography fontWeight="100" id="modal-modal-description" sx={{ mt: 2 }}>
+              {newUser.correo}
+            </Typography>
+          </Box>
+          <Box display="flex" justifyContent="space-between">
+            <Typography marginRight="10px" fontWeight="500" id="modal-modal-description" sx={{ mt: 2 }}>
+              Telefono:
+            </Typography>
+            <Typography fontWeight="100" id="modal-modal-description" sx={{ mt: 2 }}>
+              {newUser.telefono}
+            </Typography>
+            
+          </Box>
+          <Box marginTop="20px" display="flex" justifyContent="space-between">
+            <Button style={{ marginRight: "10px" }} onClick={handleClose} color='success' variant="outlined" type='submit' size='large' fullWidth>
+              IMPRIMIR
+            </Button>
+            <Button onClick={handleClose} color='error' variant="outlined" type='submit' size='large' fullWidth>
+              CERRAR
+            </Button>
+          </Box>
+        </Box>
+      </Modal>
     </UserLayout>
   )
 }
