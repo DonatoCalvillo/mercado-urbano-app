@@ -6,31 +6,34 @@ import { Box, Container,  Typography } from '@mui/material'
 import { UserLayout } from 'components/layouts'
 import { InfoProfile, Zone } from 'components/ui'
 
-import Tabasco from '../../../public/icons/Tabasco.png';
 import Cardenas from '../../../public/icons/CardenasLogo.png';
-import { GetServerSideProps } from 'next';
-import axios from 'axios';
+import MercadoUrbano from '../../../public/icons/MercadoUrbano.png';
+import { GetServerSideProps, NextPage } from 'next';
 import { mercadoUrbanoApi } from 'api';
-import { AuthContext } from 'context';
+import { IEvento } from 'interfaces/IEvento';
 
-const UserDashboard = () => {
+interface Props {
+  evento: IEvento;
+}
+
+const UserDashboard: NextPage<Props> = ({evento}) => {
   
   return (
     <UserLayout title={'Corredor gastronomico - Home'} pageDescription={'Evento de corredor gastronómico Cárdenas, Tabasco.'}>
       <Box marginTop="100px" height="100vh">
         <Container maxWidth="lg">
           <Typography variant="h1" marginTop="50px" color="#707070">
-            Semana Corredor Gastronómico
+            {`${evento.evento_nombre} ${evento.evento_semana}`}
           </Typography>
           <Typography variant="h2" marginTop="10px" color="#707070">
-            H. Cárdenas, Tabasco | Parque indendependencia | 18:00 hrs
+            H. Cárdenas, Tabasco | {evento.plaza_nombre} | {evento.evento_hora} hrs
           </Typography>
           <Box display="flex" alignItems="center" justifyContent="space-between" marginTop="50px">
             <InfoProfile admin={false}/>
-            <Zone />
+            <Zone numeroLugar={evento.lugar_numero}  inscrito={evento.usuario_evento_inscrito} fechaInscripcion={evento.usuario_evento_fechaInscripcion} />
             <Box>
               <Image src={ Cardenas } alt="puntos" width={150}/>
-              <Image src={ Tabasco } alt="puntos" width={150}/>
+              <Image src={ MercadoUrbano } alt="puntos" width={200}/>
             </Box>
           </Box>
         </Container>
@@ -39,22 +42,18 @@ const UserDashboard = () => {
   )
 }
 
-// export const getServerSideProps: GetServerSideProps = async ({ req }) =>{
-//   const { token = '' } = req.headers;
-//   console.log(token)
-//   const { user, isLoggedIn, logout } = useContext( AuthContext );
-//     // const res = await fetch('http://localhost:3001/api/auth/validateToken', options)
-//     // console.log(res.json())
-//     // const {data} = await await mercadoUrbanoApi.get('/auth/validateToken', {
-//     //   headers: { 'Authorization' : `bearer ${token}` }
-//     // })
-//     // console.log(data)
-
-//   return{
-//     props: {
-
-//     }
-//   }
-// }
+export const getServerSideProps: GetServerSideProps = async ({ req }) => {
+  const { token = '' } =  req.cookies
+  console.log(token)
+  const { data } = await mercadoUrbanoApi.get<IEvento>('/event/eventList',{
+    headers: { 'Authorization' : `bearer ${token}` }
+  })
+  console.log(data)
+  return{
+    props:{
+      evento: data
+    }
+  }
+}
 
 export default UserDashboard

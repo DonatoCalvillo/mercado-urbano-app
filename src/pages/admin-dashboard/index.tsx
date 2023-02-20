@@ -59,7 +59,6 @@ const AdminDashboard: NextPage<Props> = ({usuarios}) => {
 
 export const getStaticProps: GetStaticProps = async (ctx) => {
   const {data} = await mercadoUrbanoApi.get<IUsuarioListado>('/user/getAll?limit=100')
-  // console.log(data)
 
   return {
     props: {
