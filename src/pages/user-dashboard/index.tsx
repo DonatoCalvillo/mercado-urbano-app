@@ -43,17 +43,29 @@ const UserDashboard: NextPage<Props> = ({evento}) => {
 }
 
 export const getServerSideProps: GetServerSideProps = async ({ req }) => {
+
   const { token = '' } =  req.cookies
-  console.log(token)
+  
   const { data } = await mercadoUrbanoApi.get<IEvento>('/event/eventList',{
     headers: { 'Authorization' : `bearer ${token}` }
   })
-  console.log(data)
-  return{
-    props:{
-      evento: data
+
+  if( data ){
+    return{
+      props:{
+        evento: data
+      }
     }
   }
+
+  return {
+    redirect: {
+      destination: '/',
+      permanent:false
+    }
+  }
+
+
 }
 
 export default UserDashboard
