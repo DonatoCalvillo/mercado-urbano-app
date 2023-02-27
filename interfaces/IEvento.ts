@@ -9,3 +9,8 @@ export interface IEvento {
   lugar_numero:                    string | null;
   plaza_nombre:                    string;
 }
+
+export interface IEventos {
+  id:     string;
+  nombre: string;
+}

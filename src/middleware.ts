@@ -41,9 +41,9 @@ export async function middleware (req:NextRequest, ev:NextFetchEvent){
 
     if( req.nextUrl.pathname.startsWith('/admin-dashboard') ){
       if(rol_nombre === 'Administrador')  
-      return NextResponse.rewrite(new URL('/admin-dashboard', req.url))
+        return NextResponse.next()
+      // return NextResponse.rewrite(new URL('/admin-dashboard', req.url))
       else{
-        console.log('Hola')
         url.pathname = '/user-dashboard'
         return NextResponse.redirect(url)
       }
