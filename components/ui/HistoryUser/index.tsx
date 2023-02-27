@@ -7,9 +7,12 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
+import { IUserHistory } from '../../../interfaces/IUsuario';
+import { FC } from 'react';
+import { Typography } from '@mui/material';
 
 interface Column {
-  id: 'nombreEvento' | 'nombrePlaza' | 'puntos' | 'fecha';
+  id: 'nombreEvento' | 'nombrePlaza' | 'puntos' | 'fechaInicio' | 'fechaFin' |'numeroLugar' | 'dia';
   label: string;
   minWidth?: number;
   align?: 'right';
@@ -20,7 +23,10 @@ const columns: readonly Column[] = [
   { id: 'nombreEvento', label: 'Evento', minWidth: 100 },
   { id: 'nombrePlaza', label: 'Plaza', minWidth: 100 },
   { id: 'puntos', label: 'Puntos', minWidth: 100},
-  { id: 'fecha', label: 'Fecha', minWidth: 100}
+  { id: 'dia', label: 'Día', minWidth: 100},
+  { id: 'numeroLugar', label: 'Lugar', minWidth: 100},
+  { id: 'fechaInicio', label: 'Fecha Inicio', minWidth: 100},
+  { id: 'fechaFin', label: 'Fecha Fin', minWidth: 100}
 ];
 
 interface Data {
@@ -46,10 +52,13 @@ const rows = [
   createData('Corredor Gastronoico Semana 1',  'Parque Independecia', 1999, '2023-01-15'),
   createData('Corredor Gastronoico Semana 1',  'Parque Independecia', 1999, '2023-01-15'),
   createData('Corredor Gastronoico Semana 1',  'Parque Independecia', 1999, '2023-01-15')
-  
 ];
+interface Props {
+  userHistory : IUserHistory[];
+}
 
-export default function HistoryUser() {
+export const HistoryUser:FC<Props> = ({ userHistory }) => {
+  console.log(userHistory)
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
@@ -64,7 +73,11 @@ export default function HistoryUser() {
 
   return (
     <Paper sx={{  width: '100%', overflow: 'hidden' }}>
-      <TableContainer sx={{ maxHeight: 260 }}>
+      {
+        userHistory.length > 0 ? (
+
+          <>
+           <TableContainer sx={{ maxHeight: 260 }}>
         <Table stickyHeader aria-label="sticky table">
           <TableHead>
             <TableRow>
@@ -80,7 +93,7 @@ export default function HistoryUser() {
             </TableRow>
           </TableHead>
           <TableBody>
-            {rows
+            {userHistory
               .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
               .map((row, index) => {
                 return (
@@ -100,16 +113,24 @@ export default function HistoryUser() {
               })}
           </TableBody>
         </Table>
-      </TableContainer>
-      <TablePagination
-        rowsPerPageOptions={[10, 25, 50]}
-        component="div"
-        count={rows.length}
-        rowsPerPage={rowsPerPage}
-        page={page}
-        onPageChange={handleChangePage}
-        onRowsPerPageChange={handleChangeRowsPerPage}
-      />
+            </TableContainer>
+            <TablePagination
+              rowsPerPageOptions={[10, 25, 50]}
+              component="div"
+              count={rows.length}
+              rowsPerPage={rowsPerPage}
+              page={page}
+              onPageChange={handleChangePage}
+              onRowsPerPageChange={handleChangeRowsPerPage}
+            />
+          </>
+        ) : (
+          <Typography variant="h6" fontSize="20px" fontWeight="100" marginLeft="5px" color="#707070">
+          No hay información del usuario.
+          </Typography>
+        )
+      }
+     
     </Paper>
   );
 }

@@ -37,3 +37,13 @@ export interface IUsuarioNuevo {
   telefono:         string;
   area:             string;
 }
+
+export interface IUserHistory {
+  puntos:number;
+  dia: string;
+  nombreEvento: string;
+  nombrePlaza: string;
+  numeroLugar: string;
+  fechaInicio: string;
+  fechaFin: string;
+}

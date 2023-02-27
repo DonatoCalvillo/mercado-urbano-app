@@ -6,11 +6,14 @@ import { Avatar, Box, Button, Modal, Typography } from '@mui/material';
 import {makeStyles} from '@mui/styles'
 import DoNotDisturbOnIcon from '@mui/icons-material/DoNotDisturbOn';
 
-import HistoryUser from '../HistoryUser';
+import {HistoryUser} from '../HistoryUser';
 import Image from 'next/image';
 
 
 import Difuminar from '../../../public/icons/difuminar.png';
+import mercadoUrbanoApi from '../../../api/mercadoUrbanoApi';
+import Cookies from 'js-cookie';
+import { IUserHistory } from '../../../interfaces/IUsuario';
 
 const columns: GridColDef[] = [
   { field: 'matricula', headerName: 'Matricula', width: 200 },
@@ -33,9 +36,13 @@ interface Props {
   usuarios: IUsuarioListado[];
 }
 
+
+
 export const ListUsers:FC<Props> = ({ usuarios }) => {
+
   const [selectionModel, setSelectionModel] = useState<GridRowId[]>([]);
   const [selectedUser, setSelectedUser] = useState<IUsuarioListado>();
+  const [userHistory, setUserHistory] = useState<IUserHistory[]>([])
   
   const classes = useStyles();
 
@@ -43,6 +50,25 @@ export const ListUsers:FC<Props> = ({ usuarios }) => {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   
+  const historyOnClick = async () => {
+    const _selectedUser = usuarios.find( usuario => usuario.matricula === selectionModel.toString())
+    setSelectedUser(_selectedUser)
+    handleOpen()
+    // console.log(_selectedUser)
+    try {
+      const token = Cookies.get('token')
+      const { data } = await mercadoUrbanoApi.post('/event/getEventHistory',{
+        matricula: _selectedUser?.matricula
+      }, 
+      {
+        headers: { 'Authorization' : `bearer ${token}`}
+      })
+      setUserHistory(data.historyFinal)
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
   return (
     <>
       <Box display="flex" justifyContent="center" flexDirection="column" width="100%">
@@ -76,11 +102,12 @@ export const ListUsers:FC<Props> = ({ usuarios }) => {
           }}
             variant="outlined" color='success' 
             // onClick={handleOpen}
-            onClick={() => {
-              const _selectedUser = usuarios.find( usuario => usuario.matricula === selectionModel.toString())
-              setSelectedUser(_selectedUser)
-              handleOpen()
-            }}
+            onClick={historyOnClick}
+            //   () => {
+            //   const _selectedUser = usuarios.find( usuario => usuario.matricula === selectionModel.toString())
+            //   setSelectedUser(_selectedUser)
+            //   handleOpen()
+            // }}
           >
             Ver detalle  
           </Button>
@@ -135,7 +162,7 @@ export const ListUsers:FC<Props> = ({ usuarios }) => {
             Eliminar
           </Button>
         </Box>
-        <HistoryUser/>
+        <HistoryUser userHistory = {userHistory}/>
           {/* <Box marginTop="20px" display="flex" justifyContent="space-between">
             <Button style={{ marginRight: "10px" }} onClick={handleClose} color='success' variant="outlined" type='submit' size='large' fullWidth>
               IMPRIMIR
