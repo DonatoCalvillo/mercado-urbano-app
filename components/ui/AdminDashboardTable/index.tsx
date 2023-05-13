@@ -11,7 +11,6 @@ interface Props {
 }
 
 export const AdminDashboardTable: FC<Props>= ({ usuarios, selectedUser, handleSelectedUser }) => {
-  console.log(usuarios)
   return (
     <Box display="flex">
     <ListUsers usuarios={usuarios} handleSelectedUser={handleSelectedUser}/>

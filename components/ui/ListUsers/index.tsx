@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { DataGrid, GridColDef, GridRowId } from '@mui/x-data-grid';
 import { IUsuarioListado } from 'interfaces';
-import { FC, useState } from 'react';
+import { FC, useEffect, useState } from 'react';
 import { Avatar, Box, Button, Modal, Typography } from '@mui/material';
 import {makeStyles} from '@mui/styles'
 import DoNotDisturbOnIcon from '@mui/icons-material/DoNotDisturbOn';
@@ -38,23 +38,43 @@ interface Props {
 
 
 
-export const ListUsers:FC<Props> = ({ usuarios }) => {
+export const ListUsers:FC<Props> = ({  }) => {
 
   const [selectionModel, setSelectionModel] = useState<GridRowId[]>([]);
   const [selectedUser, setSelectedUser] = useState<IUsuarioListado>();
   const [userHistory, setUserHistory] = useState<IUserHistory[]>([])
+  const [usuarios, setUsuarios] = useState<IUsuarioListado[]>([])
   
   const classes = useStyles();
 
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+
+  useEffect(() => {
+    const getAllUsers = async () => {
+      
+      const token = Cookies.get('token')
+      const {data} = await mercadoUrbanoApi.get<IUsuarioListado[]>('/user/getAll?limit=100', {
+        headers: { 'Authorization' : `bearer ${token}`}
+      })
+
+      setUsuarios(data)
+    }
+
+    getAllUsers()
+
+  }, [])
   
   const historyOnClick = async () => {
     const _selectedUser = usuarios.find( usuario => usuario.matricula === selectionModel.toString())
+
+    if(!_selectedUser)
+      return
+
     setSelectedUser(_selectedUser)
     handleOpen()
-    // console.log(_selectedUser)
+
     try {
       const token = Cookies.get('token')
       const { data } = await mercadoUrbanoApi.post('/event/getEventHistory',{
@@ -66,6 +86,31 @@ export const ListUsers:FC<Props> = ({ usuarios }) => {
       setUserHistory(data.historyFinal)
     } catch (error) {
       console.log(error)
+    }
+  }
+
+  const deleteUser = async () => {
+    try {
+      const _selectedUser = usuarios.find( usuario => usuario.matricula === selectionModel.toString())
+
+      if(!_selectedUser)
+        return
+
+      const token = Cookies.get('token')
+      const { data } = await mercadoUrbanoApi.delete('/user/deleteUser',
+      {
+        headers: { 'Authorization' : `bearer ${token}`},
+        params: {
+          id: _selectedUser?.matricula
+        }
+      })
+// console.log(data.status)
+      if(data.status == "OK")
+        setUsuarios(data.data)
+      
+      handleClose()
+    } catch (error) {
+      
     }
   }
 
@@ -103,11 +148,7 @@ export const ListUsers:FC<Props> = ({ usuarios }) => {
             variant="outlined" color='success' 
             // onClick={handleOpen}
             onClick={historyOnClick}
-            //   () => {
-            //   const _selectedUser = usuarios.find( usuario => usuario.matricula === selectionModel.toString())
-            //   setSelectedUser(_selectedUser)
-            //   handleOpen()
-            // }}
+            // disabled={selectedUser ? false : true}
           >
             Ver detalle  
           </Button>
@@ -158,7 +199,7 @@ export const ListUsers:FC<Props> = ({ usuarios }) => {
           </Box>
         </Box>
         <Box display="flex" justifyContent="right" marginTop="20px">
-          <Button color='error' variant="outlined" style={{ }}>
+          <Button onClick={deleteUser} color='error' variant="outlined" style={{ }}>
             Eliminar
           </Button>
         </Box>
