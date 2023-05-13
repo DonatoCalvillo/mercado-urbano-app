@@ -11,19 +11,6 @@ type FormData = {
   contrasenia: string;
 };
 
-function Copyright(props: any) {
-  return (
-    <Typography
-      variant="body2"
-      color="text.secondary"
-      align="center"
-      {...props}
-    >
-      {"H. Ayuntamiento de Cárdenas, Tabasco 2021 - 2024 - Derechos Reservados"}
-    </Typography>
-  );
-}
-
 const AuthUser = () => {
   const router = useRouter();
 
@@ -70,84 +57,117 @@ const AuthUser = () => {
         justifyContent="center"
         style={{ background: "#9D2449" }}
       >
-        <form
-          onSubmit={handleSubmit(onLoginuser)}
-          noValidate
+        <Box
+          sx={{
+            marginTop: {
+              lg: 0,
+              md: 25,
+              sm: 35,
+              xs: 45,
+            },
+            marginBottom: {
+              lg: 0,
+              md: 0,
+              sm: 10,
+              xs: 10,
+            },
+            padding: {
+              lg: 3,
+              md: 3,
+              sm: 1,
+              xs: 1,
+            },
+          }}
           style={{
             background: "#ffffff",
             borderRadius: "10px",
-            padding: "20px",
           }}
         >
-          <Box sx={{ width: 350, padding: "10px 20px" }}>
-            <Grid container spacing={2}>
-              <Grid item xs={12}>
-                <Typography variant="h1" component="h1">
-                  Iniciar sesión
+          <form onSubmit={handleSubmit(onLoginuser)} noValidate>
+            <Box sx={{ width: 350, padding: "10px 20px" }}>
+              <Grid container spacing={2}>
+                <Grid item xs={12}>
+                  <Typography
+                    textAlign="center"
+                    variant="h1"
+                    component="h1"
+                    color="#848484"
+                  >
+                    Iniciar sesión
+                  </Typography>
+                  <Chip
+                    label="Credenciales incorrectas"
+                    color="error"
+                    icon={<ErrorOutline />}
+                    className="fadein"
+                    sx={{ display: showError ? "flex" : "none" }}
+                  />
+                </Grid>
+
+                <Grid item xs={12}>
+                  <TextField
+                    label="Matricula"
+                    variant="filled"
+                    fullWidth
+                    {...register("matricula", {
+                      required: "Este campo es requerido.",
+                    })}
+                    error={!!errors.matricula}
+                    helperText={errors.matricula?.message}
+                  />
+                </Grid>
+
+                <Grid item xs={12}>
+                  <TextField
+                    label="Contraseña"
+                    type="password"
+                    variant="filled"
+                    fullWidth
+                    {...register("contrasenia", {
+                      required: "Este campo es requerido.",
+                      minLength: { value: 6, message: "Minimo 6 caracteres." },
+                    })}
+                    error={!!errors.contrasenia}
+                    helperText={errors.contrasenia?.message}
+                  />
+                </Grid>
+
+                <Grid item xs={12}>
+                  {blockButton ? (
+                    <Button
+                      type="submit"
+                      color="secondary"
+                      size="large"
+                      fullWidth
+                      disabled
+                    >
+                      Ingresar
+                    </Button>
+                  ) : (
+                    <Button
+                      type="submit"
+                      color="secondary"
+                      size="large"
+                      fullWidth
+                    >
+                      Ingresar
+                    </Button>
+                  )}
+                </Grid>
+                <Typography
+                  variant="body2"
+                  color="text.secondary"
+                  align="center"
+                  sx={{ mt: 8, mb: 4 }}
+                >
+                  {
+                    "H. Ayuntamiento de Cárdenas, Tabasco 2021 - 2024 - Derechos Reservados"
+                  }
                 </Typography>
-                <Chip
-                  label="Credenciales incorrectas"
-                  color="error"
-                  icon={<ErrorOutline />}
-                  className="fadein"
-                  sx={{ display: showError ? "flex" : "none" }}
-                />
               </Grid>
-
-              <Grid item xs={12}>
-                <TextField
-                  label="Matricula"
-                  variant="filled"
-                  fullWidth
-                  {...register("matricula", {
-                    required: "Este campo es requerido.",
-                  })}
-                  error={!!errors.matricula}
-                  helperText={errors.matricula?.message}
-                />
-              </Grid>
-
-              <Grid item xs={12}>
-                <TextField
-                  label="Contraseña"
-                  type="password"
-                  variant="filled"
-                  fullWidth
-                  {...register("contrasenia", {
-                    required: "Este campo es requerido.",
-                    minLength: { value: 6, message: "Minimo 6 caracteres." },
-                  })}
-                  error={!!errors.contrasenia}
-                  helperText={errors.contrasenia?.message}
-                />
-              </Grid>
-
-              <Grid item xs={12}>
-                {blockButton ? (
-                  <Button
-                    type="submit"
-                    color="secondary"
-                    size="large"
-                    fullWidth
-                    disabled
-                  >
-                    Ingresar
-                  </Button>
-                ) : (
-                  <Button
-                    type="submit"
-                    color="secondary"
-                    size="large"
-                    fullWidth
-                  >
-                    Ingresar
-                  </Button>
-                )}
-              </Grid>
-              <Copyright sx={{ mt: 8, mb: 4 }} />
-            </Grid>
-          </Box>
-        </form>
+            </Box>
+          </form>
+        </Box>
       </Box>
     </AuthLayout>
   );
