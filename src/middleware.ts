@@ -11,7 +11,7 @@ export async function middleware(req: NextRequest) {
 
   if (!currentToken) return NextResponse.redirect(new URL("/auth", req.url));
 
-  const data = await fetch("http://localhost:8001/api/auth/validateToken", {
+  const data = await fetch("http://localhost:3001/api/auth/validateToken", {
     method: "GET",
     mode: "cors",
     headers: {
