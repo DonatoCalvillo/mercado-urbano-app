@@ -10,6 +10,7 @@ import {
   FormControl,
   Snackbar,
   Alert,
+  Grid,
 } from "@mui/material";
 import { mercadoUrbanoApi } from "api";
 import { UserLayout } from "components/layouts";
@@ -43,12 +44,7 @@ const CargaArchivos: FC<Props> = () => {
         const { data } = await mercadoUrbanoApi.get<IEventos[]>(
           "/event/getActiveEvents"
         );
-        console.log(data);
-        return {
-          props: {
-            eventos: data,
-          },
-        };
+        setEventos(data);
       } catch (error) {
         console.log(error);
       }
@@ -159,7 +155,7 @@ const CargaArchivos: FC<Props> = () => {
                     Seleccionar evento
                   </Typography>
                   <Box display="flex" justifyContent="center">
-                    <Box width="50%" marginRight="50px">
+                    <Box sx={{}} width="100%">
                       <FormControl fullWidth>
                         <InputLabel
                           onChange={handleInputDowndload}
@@ -208,8 +204,8 @@ const CargaArchivos: FC<Props> = () => {
                   >
                     Seleccionar evento
                   </Typography>
-                  <Box display="flex">
-                    <Box width="50%" marginRight="50px">
+                  <Grid container spacing={10} display="flex">
+                    <Grid item xs={12} sm={12} md={6} lg={6}>
                       <FormControl fullWidth>
                         <InputLabel
                           onChange={handleInpuUpload}
@@ -232,8 +228,16 @@ const CargaArchivos: FC<Props> = () => {
                           })}
                         </Select>
                       </FormControl>
-                    </Box>
-                    <Box width="50%" display="flex" alignItems="center">
+                    </Grid>
+                    <Grid
+                      item
+                      xs={12}
+                      sm={12}
+                      md={6}
+                      lg={6}
+                      display="flex"
+                      alignItems="center"
+                    >
                       <Input
                         inputProps={{
                           accept:
@@ -252,8 +256,8 @@ const CargaArchivos: FC<Props> = () => {
                         ref={inputRef}
                         onChange ={onFileSelected}
                       /> */}
-                    </Box>
-                  </Box>
+                    </Grid>
+                  </Grid>
                   <Box marginTop="30px" display="flex" justifyContent="center">
                     <Button
                       onClick={setExcel}
