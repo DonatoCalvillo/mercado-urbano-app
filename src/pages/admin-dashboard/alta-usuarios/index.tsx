@@ -17,7 +17,7 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import { set, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { ErrorOutline } from "@mui/icons-material";
 import Image from "next/image";
 
@@ -79,9 +79,17 @@ const AltaUsuarios = () => {
 
   const createUser = async (event: any) => {
     try {
-      console.log("entre");
       const token = Cookies.get("token");
-      let { area, rol, contrasenia, ...newUser } = userData;
+      let {
+        area,
+        rol,
+        contrasenia,
+        correo,
+        nombre,
+        apellido_materno,
+        apellido_paterno,
+        ...newUser
+      } = userData;
 
       let sendData = {};
       if (contrasenia) {
@@ -90,11 +98,16 @@ const AltaUsuarios = () => {
         sendData = { ...newUser };
       }
 
+      if (correo != "") sendData = { ...sendData, correo };
+
       try {
         const { data } = await mercadoUrbanoApi.post(
           "/auth/register",
           {
             ...sendData,
+            nombre: nombre.toUpperCase(),
+            apellido_materno: apellido_materno.toUpperCase(),
+            apellido_paterno: apellido_paterno.toUpperCase(),
             fk_area: area,
             fk_rol: rol,
           },
@@ -161,20 +174,28 @@ const AltaUsuarios = () => {
         title="Dar de alta usuario"
         pageDescription="Página usada para dar de alta usuarios nuevos para el programa del Mercado urbano."
       >
-        <Box minHeight="100vh" marginTop="100px">
-          <Container maxWidth="lg">
+        <Box minHeight="100vh">
+          <Container
+            maxWidth="lg"
+            sx={{
+              marginTop: {
+                lg: "100px",
+                md: "100px",
+                sm: "100px",
+                xs: "100px",
+              },
+            }}
+          >
             <Typography variant="h1" marginTop="50px" color="#707070">
               Dar de alta
             </Typography>
-            <Box display="flex" alignItems="center">
-              <Box minWidth="70%">
+            <Grid container display="flex" alignItems="center">
+              <Grid item xs={12} sm={12} md={6} lg={6}>
                 <form
                   onSubmit={handleSubmit(createUser)}
                   noValidate
                   style={{
-                    background: "#ffffff",
-                    borderRadius: "10px",
-                    padding: "20px",
+                    marginTop: "50px",
                   }}
                 >
                   <Box sx={{ width: 350 }}>
@@ -214,8 +235,8 @@ const AltaUsuarios = () => {
                           {...register("apellido_paterno", {
                             required: "Este campo es requerido.",
                             minLength: {
-                              value: 6,
-                              message: "Minimo 6 caracteres.",
+                              value: 4,
+                              message: "Minimo 4 caracteres.",
                             },
                           })}
                           error={!!errors.apellido_paterno}
@@ -284,10 +305,6 @@ const AltaUsuarios = () => {
                         <FormControl fullWidth>
                           <InputLabel
                             id="area-label"
-                            // { ...register('area',{
-                            //   required: true
-                            // })}
-                            // error = { !!errors.area }
                             onChange={handleInputChange}
                           >
                             Área*
@@ -303,6 +320,9 @@ const AltaUsuarios = () => {
                             error={!!errors.area}
                             onChange={handleInputChange}
                           >
+                            <MenuItem value="Administrador">
+                              Administrativo
+                            </MenuItem>
                             <MenuItem value="Gastronomia">Gastronomía</MenuItem>
                             <MenuItem value="Comercio">Comercio</MenuItem>
                           </Select>
@@ -318,10 +338,6 @@ const AltaUsuarios = () => {
                         <FormControl fullWidth>
                           <InputLabel
                             id="rol-label"
-                            // { ...register('area',{
-                            //   required: true
-                            // })}
-                            // error = { !!errors.area }
                             onChange={handleInputChange}
                           >
                             Rol*
@@ -364,16 +380,29 @@ const AltaUsuarios = () => {
                     </Grid>
                   </Box>
                 </form>
-              </Box>
-              <Box
+              </Grid>
+              <Grid
+                item
+                xs={0}
+                sm={0}
+                md={6}
+                lg={6}
                 width="60%"
+                sx={{
+                  display: {
+                    lg: "flex",
+                    md: "flex",
+                    sm: "none",
+                    xs: "none",
+                  },
+                }}
                 display="flex"
                 alignItems="center"
                 justifyContent="center"
               >
                 <Image src={SignIn} alt="puntos" width={500} />
-              </Box>
-            </Box>
+              </Grid>
+            </Grid>
           </Container>
         </Box>
         <Modal
@@ -387,6 +416,14 @@ const AltaUsuarios = () => {
             top="50%"
             left="50%"
             width="500px"
+            sx={{
+              width: {
+                lg: "500px",
+                md: "500px",
+                sm: "500px",
+                xs: "100%",
+              },
+            }}
             style={{
               transform: "translate(-50%, -50%)",
               boxShadow: "24",
