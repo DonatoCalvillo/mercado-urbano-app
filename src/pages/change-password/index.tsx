@@ -99,7 +99,7 @@ const ChangePassword = () => {
           sx={{
             width: {
               lg: "1000px",
-              md: "8000px",
+              md: "800px",
               sm: "500px",
               xs: "400px",
             },

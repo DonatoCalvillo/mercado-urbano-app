@@ -1,4 +1,4 @@
-import { Box, Container, Typography } from "@mui/material";
+import { Box, Container, Grid, Typography } from "@mui/material";
 import { UserLayout } from "components/layouts";
 import React from "react";
 import Image from "next/image";
@@ -31,11 +31,17 @@ const Home = () => {
           >
             <Image
               style={{ marginRight: "50px" }}
-              src={Cardenas}
-              alt="puntos"
+              src="https://res.cloudinary.com/djtf4beq7/image/upload/v1684046932/CardenasLogo_mkewrw.png"
+              alt="Logo de Cárdenas"
               width={150}
+              height={121}
             />
-            <Image src={MercadoUrbano} alt="puntos" width={200} />
+            <Image
+              src="https://res.cloudinary.com/djtf4beq7/image/upload/v1684047131/MercadoUrbano_jq4msh.png"
+              alt="Logo de Direccion de Fomento Economico y Turismo"
+              width={200}
+              height={99}
+            />
           </Box>
           <Box
             sx={{
@@ -55,35 +61,45 @@ const Home = () => {
             >
               <Box sx={{ gridArea: "image1" }}>
                 <Image
-                  src={MU1}
+                  src="https://res.cloudinary.com/djtf4beq7/image/upload/v1684047780/MU-1_imihut.jpg"
                   alt="puntos"
+                  width={572}
+                  height={445}
                   style={{ width: "100%", height: "100%" }}
                 />
               </Box>
               <Box sx={{ gridArea: "image2" }}>
                 <Image
-                  src={MU2}
+                  src="https://res.cloudinary.com/djtf4beq7/image/upload/v1684047787/MU-2_kjrguv.jpg"
+                  width={282}
+                  height={218}
                   alt="puntos"
                   style={{ width: "100%", height: "100%" }}
                 />
               </Box>
               <Box sx={{ gridArea: "image3" }}>
                 <Image
-                  src={MU3}
+                  src="https://res.cloudinary.com/djtf4beq7/image/upload/v1684047787/MU-3_zafhme.jpg"
+                  width={282}
+                  height={218}
                   alt="puntos"
                   style={{ width: "100%", height: "100%" }}
                 />
               </Box>
               <Box sx={{ gridArea: "image4" }}>
                 <Image
-                  src={MU4}
+                  src="https://res.cloudinary.com/djtf4beq7/image/upload/v1684047775/MU-4_euy21u.jpg"
+                  width={282}
+                  height={218}
                   alt="puntos"
                   style={{ width: "100%", height: "100%" }}
                 />
               </Box>
               <Box sx={{ gridArea: "image5" }}>
                 <Image
-                  src={MU5}
+                  src="https://res.cloudinary.com/djtf4beq7/image/upload/v1684047773/MU-5_tmkgkh.jpg"
+                  width={282}
+                  height={218}
                   alt="puntos"
                   style={{ width: "100%", height: "100%" }}
                 />

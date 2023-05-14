@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 
 import Image from "next/image";
 
-import { Box, Container, Typography } from "@mui/material";
+import { Box, Container, Grid, Typography } from "@mui/material";
 
 import { UserLayout } from "components/layouts";
 import { InfoProfile, Zone } from "components/ui";
@@ -15,10 +15,16 @@ import { AuthContext } from "context";
 
 import Cookies from "js-cookie";
 
-import Cardenas from "../../../public/icons/CardenasLogo.png";
-import MercadoUrbano from "../../../public/icons/MercadoUrbano.png";
-import CroquisComercio from "../../../public/images/croquis_comercio.png";
-import CroquisGastronomia from "../../../public/images/croquis_gastronomia.png";
+// import Cardenas from "../../../public/icons/CardenasLogo.png";
+// import MercadoUrbano from "../../../public/icons/MercadoUrbano.png";
+// import CroquisComercio from "../../../public/images/croquis_comercio.png";
+// import CroquisGastronomia from "../../../public/images/croquis_gastronomia.png";
+
+const croquisComercio =
+  "https://res.cloudinary.com/djtf4beq7/image/upload/v1684047731/croquis_comercio_nx7u7j.png";
+
+const croquisGastronomia =
+  "https://res.cloudinary.com/djtf4beq7/image/upload/v1684047728/croquis_gastronomia_thczpp.png";
 
 const UserDashboard = () => {
   const { user } = useContext(AuthContext);
@@ -63,37 +69,66 @@ const UserDashboard = () => {
                 H. Cárdenas, Tabasco | {event.plaza_nombre} |{" "}
                 {event.evento_hora} hrs
               </Typography>
-              <Box
+              <Grid
+                container
                 display="flex"
                 alignItems="center"
-                justifyContent="space-between"
+                justifyContent="center"
                 marginTop="50px"
               >
-                <InfoProfile admin={false} />
-                <Zone
-                  numeroLugar={event.lugar_numero}
-                  inscrito={event.usuario_evento_inscrito}
-                  fechaInscripcion={event.usuario_evento_fechaInscripcion}
-                />
-                <Box>
-                  <Image src={Cardenas} alt="puntos" width={150} />
-                  <Image src={MercadoUrbano} alt="puntos" width={200} />
-                </Box>
-              </Box>
+                <Grid item>
+                  <InfoProfile admin={false} />
+                </Grid>
+                <Grid item>
+                  <Zone
+                    numeroLugar={event.lugar_numero}
+                    inscrito={event.usuario_evento_inscrito}
+                    fechaInscripcion={event.usuario_evento_fechaInscripcion}
+                  />
+                </Grid>
+                <Grid item>
+                  <Grid container display="flex" justifyContent="center">
+                    <Grid item>
+                      <Image
+                        src="https://res.cloudinary.com/djtf4beq7/image/upload/v1684046932/CardenasLogo_mkewrw.png"
+                        alt="Logo de Cárdenas"
+                        width={150}
+                        height={121}
+                      />
+                    </Grid>
+                    <Grid item>
+                      <Image
+                        src="https://res.cloudinary.com/djtf4beq7/image/upload/v1684047131/MercadoUrbano_jq4msh.png"
+                        alt="Logo de Direccion de Fomento Economico y Turismo"
+                        width={200}
+                        height={99}
+                      />
+                    </Grid>
+                  </Grid>
+                </Grid>
+              </Grid>
               <Box
                 marginTop="50px"
-                minWidth="100%"
+                width="100%"
                 display="flex"
                 justifyContent="center"
               >
                 <Image
                   src={
                     user?.area === "Gastronomia"
-                      ? CroquisGastronomia
-                      : CroquisComercio
+                      ? croquisGastronomia
+                      : croquisComercio
                   }
                   alt="puntos"
-                  width={1000}
+                  width={870}
+                  height={1160}
+                  style={{
+                    maxWidth: "100%",
+                    height: "auto",
+                    padding: 0,
+                    margin: 0,
+                    marginBottom: "40px",
+                  }}
                 />
               </Box>
             </Container>
@@ -103,17 +138,17 @@ const UserDashboard = () => {
         <>
           {
             <Box
-              marginTop="100px"
+              // marginTop="100px"
               height="100vh"
               display="flex"
               flexDirection="column"
               justifyContent="center"
               alignItems="center"
             >
-              <Typography variant="h1" color="#707070">
+              <Typography textAlign="center" variant="h1" color="#707070">
                 {message}
               </Typography>
-              <Typography variant="h2" color="#707070">
+              <Typography textAlign="center" variant="h2" color="#707070">
                 Favor de comunicarse con soporte.
               </Typography>
             </Box>

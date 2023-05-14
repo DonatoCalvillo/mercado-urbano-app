@@ -400,7 +400,12 @@ const AltaUsuarios = () => {
                 alignItems="center"
                 justifyContent="center"
               >
-                <Image src={SignIn} alt="puntos" width={500} />
+                <Image
+                  src="https://res.cloudinary.com/djtf4beq7/image/upload/v1684084323/signin_fhqnfo.svg"
+                  alt="puntos"
+                  width={500}
+                  height={343}
+                />
               </Grid>
             </Grid>
           </Container>

@@ -87,10 +87,20 @@ const AdminDashboard = () => {
                 justifyContent="center"
               >
                 <Grid item>
-                  <Image src={Cardenas} alt="puntos" width={150} />
+                  <Image
+                    src="https://res.cloudinary.com/djtf4beq7/image/upload/v1684046932/CardenasLogo_mkewrw.png"
+                    alt="Logo de Cárdenas"
+                    width={150}
+                    height={121}
+                  />
                 </Grid>
                 <Grid item>
-                  <Image src={MercadoUrbano} alt="puntos" width={200} />
+                  <Image
+                    src="https://res.cloudinary.com/djtf4beq7/image/upload/v1684047131/MercadoUrbano_jq4msh.png"
+                    alt="Logo de Direccion de Fomento Economico y Turismo"
+                    width={200}
+                    height={99}
+                  />
                 </Grid>
               </Grid>
             </Grid>

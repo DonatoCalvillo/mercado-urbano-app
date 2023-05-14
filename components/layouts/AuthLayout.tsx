@@ -60,12 +60,18 @@ export const AuthLayout: FC<Props> = ({
           justifyContent="center"
         >
           <Image
-            src={Cardenas}
-            alt="puntos"
+            src="https://res.cloudinary.com/djtf4beq7/image/upload/v1684046932/CardenasLogo_mkewrw.png"
+            alt="Logo de Cárdenas"
             width={150}
+            height={121}
             style={{ marginRight: "30px" }}
           />
-          <Image src={MercadoUrbano} alt="puntos" width={200} />
+          <Image
+            src="https://res.cloudinary.com/djtf4beq7/image/upload/v1684047131/MercadoUrbano_jq4msh.png"
+            alt="Logo de Direccion de Fomento Economico y Turismo"
+            width={200}
+            height={99}
+          />
         </Grid>
         <Grid item xs={12} sm={12} md={12} lg={6}>
           <Typography

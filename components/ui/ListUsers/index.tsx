@@ -233,7 +233,12 @@ export const ListUsers: FC<Props> = ({}) => {
                 #{selectedUser?.matricula}
               </Typography>
               <Box display="flex" alignItems="center">
-                <Image src={Difuminar} alt="puntos" width={30} />
+                <Image
+                  src="https://res.cloudinary.com/djtf4beq7/image/upload/v1684083984/difuminar_i7fuft.png"
+                  alt="puntos"
+                  width={30}
+                  height={30}
+                />
                 <Typography
                   variant="h6"
                   fontSize="20px"
