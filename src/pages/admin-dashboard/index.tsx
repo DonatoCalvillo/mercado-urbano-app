@@ -1,7 +1,7 @@
 import React from "react";
 import Image from "next/image";
 
-import { Box, Container, Typography } from "@mui/material";
+import { Box, Container, Grid, Typography } from "@mui/material";
 import { UserLayout } from "components/layouts";
 import { InfoProfile } from "components/ui";
 
@@ -34,24 +34,67 @@ const AdminDashboard = () => {
     >
       <Box minHeight="100vh" display="flex" alignItems="center">
         <Container maxWidth="lg">
-          <Typography variant="h1" marginTop="50px" color="#707070">
+          <Typography
+            variant="h1"
+            sx={{
+              marginTop: {
+                lg: "50px",
+                md: "100px",
+                sm: "100px",
+                xs: "100px",
+              },
+            }}
+            marginTop="50px"
+            color="#707070"
+          >
             Panel administrativo
           </Typography>
           <Typography variant="h2" marginTop="10px" color="#707070">
             H. Cárdenas, Tabasco
           </Typography>
-          <Box
+          <Grid
+            container
             display="flex"
             alignItems="center"
             justifyContent="space-between"
             marginTop="50px"
           >
-            <InfoProfile admin={true} />
-            <Box>
-              <Image src={Cardenas} alt="puntos" width={150} />
-              <Image src={MercadoUrbano} alt="puntos" width={200} />
-            </Box>
-          </Box>
+            <Grid
+              display="flex"
+              justifyContent="center"
+              item
+              xs={12}
+              sm={12}
+              md={6}
+              lg={6}
+            >
+              <InfoProfile admin={true} />
+            </Grid>
+            <Grid
+              display="flex"
+              justifyContent="center"
+              item
+              xs={12}
+              sm={12}
+              md={6}
+              lg={6}
+              marginTop="10px"
+            >
+              <Grid
+                container
+                spacing={2}
+                display="flex"
+                justifyContent="center"
+              >
+                <Grid item>
+                  <Image src={Cardenas} alt="puntos" width={150} />
+                </Grid>
+                <Grid item>
+                  <Image src={MercadoUrbano} alt="puntos" width={200} />
+                </Grid>
+              </Grid>
+            </Grid>
+          </Grid>
           <Box marginTop="50px" width="100%">
             <Box display="flex" marginBottom="20px">
               <Typography margin="auto" variant="h2" color="#707070">
