@@ -3,35 +3,52 @@ import {
   Box,
   Button,
   Container,
-  List,
-  ListItem,
-  ListItemText,
   Toolbar,
   Typography,
 } from "@mui/material";
-import Link from "next/link";
-import { useRouter } from "next/router";
-import { useContext } from "react";
-import { AuthContext } from "../../../context/auth/AuthContext";
+import {
+  AccountCircleOutlined,
+  AdminPanelSettings,
+  CategoryOutlined,
+  ConfirmationNumberOutlined,
+  EscalatorWarningOutlined,
+  FemaleOutlined,
+  LoginOutlined,
+  MaleOutlined,
+  SearchOutlined,
+  VpnKeyOutlined,
+  Home,
+} from "@mui/icons-material";
+import PasswordIcon from "@mui/icons-material/Password";
+import PersonAddIcon from "@mui/icons-material/PersonAdd";
+import UploadFileIcon from "@mui/icons-material/UploadFile";
+import MenuIcon from "@mui/icons-material/Menu";
 
-// const navItems = ['Inicio', 'Dar de alta','Subir puntuacion', 'Reportes' ];
-const BASE_URL = "http://localhost:3000";
+import { useRouter } from "next/router";
+import { useContext, useState } from "react";
+import { AuthContext } from "../../../context/auth/AuthContext";
+import { SideMenu } from "../SideMenu";
+
 const navItemsAdmin = [
   {
     name: "Inicio",
     url: "/admin-dashboard",
+    icon: AdminPanelSettings,
   },
   {
     name: "Dar de alta",
     url: "/admin-dashboard/alta-usuarios",
+    icon: PersonAddIcon,
   },
   {
     name: "Subir puntuacion",
     url: "/admin-dashboard/subir-puntuacion",
+    icon: UploadFileIcon,
   },
   {
     name: "Cambiar contraseña",
     url: "/change-password",
+    icon: PasswordIcon,
   },
 ];
 
@@ -39,16 +56,19 @@ const navItemsUser = [
   {
     name: "Inicio",
     url: "/user-dashboard",
+    icon: Home,
   },
   {
     name: "Cambiar contraseña",
     url: "/change-password",
+    icon: PasswordIcon,
   },
 ];
 
 export const Navbar = () => {
   const router = useRouter();
   const { user, isLoggedIn, logout } = useContext(AuthContext);
+  const [activeMenu, setActiveMenu] = useState(false);
 
   const navigateTo = (url: string) => {
     router.push(url);
@@ -57,6 +77,8 @@ export const Navbar = () => {
   const onLogout = () => {
     logout();
   };
+
+  const openCloseMenu = () => {};
 
   return (
     <AppBar
@@ -69,7 +91,12 @@ export const Navbar = () => {
     >
       <Toolbar>
         <Container>
-          <Box display="flex" justifyContent="space-between">
+          <Box
+            sx={{
+              display: { lg: "flex", md: "flex", sm: "none", xs: "none" },
+            }}
+            justifyContent="space-between"
+          >
             {(user?.rol_nombre === "Administrador" ||
               user?.rol_nombre === "SuperAdministrador") && (
               <Box
@@ -157,6 +184,32 @@ export const Navbar = () => {
               )}
             </Box>
           </Box>
+          <Box
+            sx={{
+              display: { lg: "none", md: "none", sm: "flex", xs: "flex" },
+              justifyContent: { xs: "right" },
+            }}
+          >
+            <Button
+              size="small"
+              variant="text"
+              style={{ color: "#FFF" }}
+              onClick={() => setActiveMenu(true)}
+            >
+              <MenuIcon />
+            </Button>
+          </Box>
+
+          <SideMenu
+            navItemsAdmin={navItemsAdmin}
+            navItemsUser={navItemsUser}
+            isLoggedIn={isLoggedIn}
+            logout={onLogout}
+            user={user}
+            navigateTo={navigateTo}
+            activeMenu={activeMenu}
+            setActiveMenu={setActiveMenu}
+          />
         </Container>
       </Toolbar>
     </AppBar>
