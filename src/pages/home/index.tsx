@@ -62,8 +62,16 @@ const Home = () => {
                 gridTemplateColumns: "repeat(4, 1fr)",
                 gap: 1,
                 gridTemplateRows: "repeat(2, 1fr)",
-                gridTemplateAreas: `"image1 image1 image2 image3"
-                                    "image1 image1 image4 image5"`,
+                gridTemplateAreas: {
+                  lg: `"image1 image1 image2 image3"
+                       "image1 image1 image4 image5"`,
+                  md: `"image1 image1 image2 image3"
+                       "image1 image1 image4 image5"`,
+                  sm: `"image1 image1 image1 image1"
+                       "image1 image1 image1 image1"`,
+                  xs: `"image1 image1 image1 image1"
+                  "image1 image1 image1 image1"`,
+                },
               }}
             >
               <Box sx={{ gridArea: "image1" }}>
@@ -75,7 +83,9 @@ const Home = () => {
                   style={{ width: "100%", height: "100%" }}
                 />
               </Box>
-              <Box sx={{ gridArea: "image2" }}>
+              <Box
+                sx={{ gridArea: "image2", display: { xs: "none", md: "flex" } }}
+              >
                 <Image
                   src="https://res.cloudinary.com/djtf4beq7/image/upload/v1684047787/MU-2_kjrguv.jpg"
                   width={282}
@@ -84,7 +94,9 @@ const Home = () => {
                   style={{ width: "100%", height: "100%" }}
                 />
               </Box>
-              <Box sx={{ gridArea: "image3" }}>
+              <Box
+                sx={{ gridArea: "image3", display: { xs: "none", md: "flex" } }}
+              >
                 <Image
                   src="https://res.cloudinary.com/djtf4beq7/image/upload/v1684047787/MU-3_zafhme.jpg"
                   width={282}
@@ -93,7 +105,9 @@ const Home = () => {
                   style={{ width: "100%", height: "100%" }}
                 />
               </Box>
-              <Box sx={{ gridArea: "image4" }}>
+              <Box
+                sx={{ gridArea: "image4", display: { xs: "none", md: "flex" } }}
+              >
                 <Image
                   src="https://res.cloudinary.com/djtf4beq7/image/upload/v1684047775/MU-4_euy21u.jpg"
                   width={282}
@@ -102,7 +116,9 @@ const Home = () => {
                   style={{ width: "100%", height: "100%" }}
                 />
               </Box>
-              <Box sx={{ gridArea: "image5" }}>
+              <Box
+                sx={{ gridArea: "image5", display: { xs: "none", md: "flex" } }}
+              >
                 <Image
                   src="https://res.cloudinary.com/djtf4beq7/image/upload/v1684047773/MU-5_tmkgkh.jpg"
                   width={282}
