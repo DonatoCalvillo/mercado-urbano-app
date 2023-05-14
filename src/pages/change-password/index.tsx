@@ -94,8 +94,16 @@ const ChangePassword = () => {
         alignItems="center"
         justifyContent="center"
       >
-        <Box
-          width="1000px"
+        <Grid
+          container
+          sx={{
+            width: {
+              lg: "1000px",
+              md: "8000px",
+              sm: "500px",
+              xs: "400px",
+            },
+          }}
           height="500px"
           display="flex"
           alignItems="center"
@@ -104,86 +112,94 @@ const ChangePassword = () => {
             boxShadow: "3px 3px 15px -1px rgba(0,0,0,0.3)",
           }}
         >
-          <form
-            onSubmit={handleSubmit(onChangePassword)}
-            noValidate
-            style={{
-              background: "#ffffff",
-              borderRadius: "10px",
-              padding: "20px",
-            }}
-          >
-            <Box sx={{ width: 350, padding: "10px 20px" }}>
-              <Grid container spacing={2}>
-                <Grid item xs={12}>
-                  <Typography variant="h1" component="h1">
-                    Cambiar contraseña
-                  </Typography>
-                  <Chip
-                    label={labelError}
-                    color="error"
-                    icon={<ErrorOutline />}
-                    className="fadein"
-                    sx={{ display: showError ? "flex" : "none" }}
-                  />
-                </Grid>
-
-                <Grid item xs={12}>
-                  <TextField
-                    label="Contraseña nueva"
-                    type="password"
-                    variant="filled"
-                    fullWidth
-                    {...register("contraseniaUno", {
-                      required: "Este campo es requerido.",
-                      minLength: { value: 6, message: "Minimo 6 caracteres." },
-                    })}
-                    error={!!errors.contraseniaUno}
-                    helperText={errors.contraseniaUno?.message}
-                  />
-                </Grid>
-
-                <Grid item xs={12}>
-                  <TextField
-                    label="Repite la contraseña nueva"
-                    type="password"
-                    variant="filled"
-                    fullWidth
-                    {...register("contraseniaDos", {
-                      required: "Este campo es requerido.",
-                      minLength: { value: 6, message: "Minimo 6 caracteres." },
-                    })}
-                    error={!!errors.contraseniaDos}
-                    helperText={errors.contraseniaDos?.message}
-                  />
-                </Grid>
-
-                <Grid item xs={12}>
-                  {blockButton ? (
-                    <Button
-                      type="submit"
-                      color="secondary"
-                      size="large"
-                      fullWidth
-                      disabled
-                    >
-                      Ingresar
-                    </Button>
-                  ) : (
-                    <Button
-                      type="submit"
-                      color="secondary"
-                      size="large"
-                      fullWidth
-                    >
+          <Grid item>
+            <form
+              onSubmit={handleSubmit(onChangePassword)}
+              noValidate
+              style={{
+                background: "#ffffff",
+                borderRadius: "10px",
+                padding: "20px",
+              }}
+            >
+              <Box sx={{ width: 350, padding: "10px 20px" }}>
+                <Grid container spacing={2}>
+                  <Grid item xs={12}>
+                    <Typography variant="h1" component="h1">
                       Cambiar contraseña
-                    </Button>
-                  )}
+                    </Typography>
+                    <Chip
+                      label={labelError}
+                      color="error"
+                      icon={<ErrorOutline />}
+                      className="fadein"
+                      sx={{ display: showError ? "flex" : "none" }}
+                    />
+                  </Grid>
+
+                  <Grid item xs={12}>
+                    <TextField
+                      label="Contraseña nueva"
+                      type="password"
+                      variant="filled"
+                      fullWidth
+                      {...register("contraseniaUno", {
+                        required: "Este campo es requerido.",
+                        minLength: {
+                          value: 6,
+                          message: "Minimo 6 caracteres.",
+                        },
+                      })}
+                      error={!!errors.contraseniaUno}
+                      helperText={errors.contraseniaUno?.message}
+                    />
+                  </Grid>
+
+                  <Grid item xs={12}>
+                    <TextField
+                      label="Repite la contraseña nueva"
+                      type="password"
+                      variant="filled"
+                      fullWidth
+                      {...register("contraseniaDos", {
+                        required: "Este campo es requerido.",
+                        minLength: {
+                          value: 6,
+                          message: "Minimo 6 caracteres.",
+                        },
+                      })}
+                      error={!!errors.contraseniaDos}
+                      helperText={errors.contraseniaDos?.message}
+                    />
+                  </Grid>
+
+                  <Grid item xs={12}>
+                    {blockButton ? (
+                      <Button
+                        type="submit"
+                        color="secondary"
+                        size="large"
+                        fullWidth
+                        disabled
+                      >
+                        Ingresar
+                      </Button>
+                    ) : (
+                      <Button
+                        type="submit"
+                        color="secondary"
+                        size="large"
+                        fullWidth
+                      >
+                        Cambiar contraseña
+                      </Button>
+                    )}
+                  </Grid>
                 </Grid>
-              </Grid>
-            </Box>
-          </form>
-          <Box>
+              </Box>
+            </form>
+          </Grid>
+          <Grid item>
             <Typography
               variant="h2"
               component="h2"
@@ -226,8 +242,8 @@ const ChangePassword = () => {
                 Un caracter especial ($%&)
               </Typography>
             </List>
-          </Box>
-        </Box>
+          </Grid>
+        </Grid>
       </Box>
     </UserLayout>
   );

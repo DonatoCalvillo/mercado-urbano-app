@@ -16,7 +16,6 @@ import { mercadoUrbanoApi } from "api";
 import { UserLayout } from "components/layouts";
 import saveAs from "file-saver";
 import Cookies from "js-cookie";
-import { GetStaticProps } from "next";
 import React, { ChangeEvent, FC, useEffect, useRef } from "react";
 import { useState } from "react";
 import { IEventos } from "../../../../interfaces/IEvento";
@@ -250,12 +249,6 @@ const CargaArchivos: FC<Props> = () => {
                         fullWidth
                         onChange={onFileSelected}
                       />
-                      {/* <input 
-                        type="file"
-                        accept='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
-                        ref={inputRef}
-                        onChange ={onFileSelected}
-                      /> */}
                     </Grid>
                   </Grid>
                   <Box marginTop="30px" display="flex" justifyContent="center">
@@ -287,15 +280,5 @@ const CargaArchivos: FC<Props> = () => {
     </>
   );
 };
-
-// export const getStaticProps: GetStaticProps = async (ctx) => {
-//   const {data} = await mercadoUrbanoApi.get<IEventos[]>('/event/getActiveEvents')
-//   console.log(data)
-//   return {
-//     props: {
-//       eventos: data
-//     }
-//   }
-// }
 
 export default CargaArchivos;
