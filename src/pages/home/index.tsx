@@ -1,4 +1,4 @@
-import { Box, Container, Grid, Typography } from "@mui/material";
+import { Box, Container, Typography } from "@mui/material";
 import { UserLayout } from "components/layouts";
 import React from "react";
 import Image from "next/image";
@@ -20,7 +20,14 @@ const Home = () => {
     >
       <Box marginTop="100px" minHeight="100vh">
         <Container maxWidth="lg">
-          <Typography variant="h1" marginBottom="50px" color="#707070">
+          <Typography
+            sx={{
+              textAlign: { lg: "left", md: "left", sm: "center", xs: "center" },
+            }}
+            variant="h1"
+            marginBottom="50px"
+            color="#707070"
+          >
             Iniciativa: Mercado de progreso y bienestar
           </Typography>
           <Box
@@ -30,7 +37,7 @@ const Home = () => {
             alignItems="end"
           >
             <Image
-              style={{ marginRight: "50px" }}
+              style={{ marginRight: "10px" }}
               src="https://res.cloudinary.com/djtf4beq7/image/upload/v1684046932/CardenasLogo_mkewrw.png"
               alt="Logo de Cárdenas"
               width={150}
