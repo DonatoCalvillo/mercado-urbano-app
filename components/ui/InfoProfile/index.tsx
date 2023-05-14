@@ -3,8 +3,6 @@ import { AuthContext } from "context";
 import Image from "next/image";
 import { FC, useContext } from "react";
 
-import Difuminar from "../../../public/icons/difuminar.png";
-
 interface Props {
   admin: boolean;
 }

@@ -15,11 +15,6 @@ import { AuthContext } from "context";
 
 import Cookies from "js-cookie";
 
-// import Cardenas from "../../../public/icons/CardenasLogo.png";
-// import MercadoUrbano from "../../../public/icons/MercadoUrbano.png";
-// import CroquisComercio from "../../../public/images/croquis_comercio.png";
-// import CroquisGastronomia from "../../../public/images/croquis_gastronomia.png";
-
 const croquisComercio =
   "https://res.cloudinary.com/djtf4beq7/image/upload/v1684047731/croquis_comercio_nx7u7j.png";
 

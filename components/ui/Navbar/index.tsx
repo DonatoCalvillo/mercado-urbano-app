@@ -7,22 +7,13 @@ import {
   Typography,
 } from "@mui/material";
 import {
-  AccountCircleOutlined,
   AdminPanelSettings,
-  CategoryOutlined,
-  ConfirmationNumberOutlined,
-  EscalatorWarningOutlined,
-  FemaleOutlined,
-  LoginOutlined,
-  MaleOutlined,
-  SearchOutlined,
-  VpnKeyOutlined,
   Home,
+  Password,
+  PersonAdd,
+  UploadFile,
+  Menu,
 } from "@mui/icons-material";
-import PasswordIcon from "@mui/icons-material/Password";
-import PersonAddIcon from "@mui/icons-material/PersonAdd";
-import UploadFileIcon from "@mui/icons-material/UploadFile";
-import MenuIcon from "@mui/icons-material/Menu";
 
 import { useRouter } from "next/router";
 import { useContext, useState } from "react";
@@ -38,17 +29,17 @@ const navItemsAdmin = [
   {
     name: "Dar de alta",
     url: "/admin-dashboard/alta-usuarios",
-    icon: PersonAddIcon,
+    icon: PersonAdd,
   },
   {
     name: "Subir puntuacion",
     url: "/admin-dashboard/subir-puntuacion",
-    icon: UploadFileIcon,
+    icon: UploadFile,
   },
   {
     name: "Cambiar contraseña",
     url: "/change-password",
-    icon: PasswordIcon,
+    icon: Password,
   },
 ];
 
@@ -61,7 +52,7 @@ const navItemsUser = [
   {
     name: "Cambiar contraseña",
     url: "/change-password",
-    icon: PasswordIcon,
+    icon: Password,
   },
 ];
 
@@ -196,7 +187,7 @@ export const Navbar = () => {
               style={{ color: "#FFF" }}
               onClick={() => setActiveMenu(true)}
             >
-              <MenuIcon />
+              <Menu />
             </Button>
           </Box>
 

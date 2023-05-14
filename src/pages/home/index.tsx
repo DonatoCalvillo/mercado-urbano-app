@@ -3,15 +3,6 @@ import { UserLayout } from "components/layouts";
 import React from "react";
 import Image from "next/image";
 
-import MU1 from "../../../public/images/MU-1.jpg";
-import MU2 from "../../../public/images/MU-2.jpg";
-import MU3 from "../../../public/images/MU-3.jpg";
-import MU4 from "../../../public/images/MU-4.jpg";
-import MU5 from "../../../public/images/MU-5.jpg";
-
-import MercadoUrbano from "../../../public/icons/MercadoUrbano.png";
-import Cardenas from "../../../public/icons/CardenasLogo.png";
-
 const Home = () => {
   return (
     <UserLayout

@@ -13,11 +13,7 @@ import Button from "@mui/material/Button";
 import { mercadoUrbanoApi } from "api";
 import { AuthContext } from "context";
 import Cookies from "js-cookie";
-import {
-  ILugares,
-  ILugar,
-  ILugarSeleccionado,
-} from "../../../interfaces/ILugares";
+import { ILugares, ILugarSeleccionado } from "../../../interfaces/ILugares";
 
 interface Props {
   inscrito: number;

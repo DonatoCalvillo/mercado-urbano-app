@@ -5,15 +5,9 @@ import { Box, Container, Grid, Typography } from "@mui/material";
 import { UserLayout } from "components/layouts";
 import { InfoProfile } from "components/ui";
 
-import MercadoUrbano from "../../../public/icons/MercadoUrbano.png";
-import Cardenas from "../../../public/icons/CardenasLogo.png";
-
 import { AdminDashboardTable } from "components/ui/AdminDashboardTable";
-import { useState, useEffect } from "react";
-import { GetStaticProps, NextPage } from "next";
-import { mercadoUrbanoApi } from "api";
+import { useState } from "react";
 import { IUsuarioListado } from "../../../interfaces/IUsuario";
-import Cookies from "js-cookie";
 
 interface Props {
   usuarios: IUsuarioListado[];

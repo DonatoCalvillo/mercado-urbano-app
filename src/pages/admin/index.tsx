@@ -1,12 +1,4 @@
-import {
-  Avatar,
-  Box,
-  Button,
-  Chip,
-  Grid,
-  TextField,
-  Typography,
-} from "@mui/material";
+import { Box, Button, Chip, Grid, TextField, Typography } from "@mui/material";
 import { useForm } from "react-hook-form";
 import { AuthLayout } from "components/layouts/AuthLayout";
 import { ErrorOutline } from "@mui/icons-material";

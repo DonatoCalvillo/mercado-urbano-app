@@ -1,9 +1,8 @@
-import { Copyright, ErrorOutline } from "@mui/icons-material";
+import { ErrorOutline } from "@mui/icons-material";
 import {
   Box,
   Button,
   Chip,
-  Container,
   Grid,
   List,
   TextField,

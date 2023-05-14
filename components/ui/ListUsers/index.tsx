@@ -9,7 +9,6 @@ import DoNotDisturbOnIcon from "@mui/icons-material/DoNotDisturbOn";
 import { HistoryUser } from "../HistoryUser";
 import Image from "next/image";
 
-import Difuminar from "../../../public/icons/difuminar.png";
 import mercadoUrbanoApi from "../../../api/mercadoUrbanoApi";
 import Cookies from "js-cookie";
 import { IUserHistory } from "../../../interfaces/IUsuario";
