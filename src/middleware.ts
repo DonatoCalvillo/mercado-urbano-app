@@ -12,13 +12,16 @@ export async function middleware(req: NextRequest) {
   if (!currentToken) return NextResponse.redirect(new URL("/auth", req.url));
 
   try {
-    const data = await fetch("http://localhost:3001/api/auth/validateToken", {
-      method: "GET",
-      mode: "cors",
-      headers: {
-        Authorization: `bearer ${currentToken}`,
-      },
-    })
+    const data = await fetch(
+      "http://187.157.11.227:8003/api/auth/validateToken",
+      {
+        method: "GET",
+        mode: "cors",
+        headers: {
+          Authorization: `bearer ${currentToken}`,
+        },
+      }
+    )
       .then((data) => data.json())
       .catch((error) => {
         console.log(error);

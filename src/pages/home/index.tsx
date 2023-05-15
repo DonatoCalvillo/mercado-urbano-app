@@ -67,7 +67,7 @@ const Home = () => {
             >
               <Box sx={{ gridArea: "image1" }}>
                 <Image
-                  src="https://res.cloudinary.com/djtf4beq7/image/upload/v1684047780/MU-1_imihut.jpg"
+                  src="https://res.cloudinary.com/djtf4beq7/image/upload/v1684139627/MU-1-low_iullrv.jpg"
                   alt="puntos"
                   width={572}
                   height={445}
@@ -78,7 +78,7 @@ const Home = () => {
                 sx={{ gridArea: "image2", display: { xs: "none", md: "flex" } }}
               >
                 <Image
-                  src="https://res.cloudinary.com/djtf4beq7/image/upload/v1684047787/MU-2_kjrguv.jpg"
+                  src="https://res.cloudinary.com/djtf4beq7/image/upload/v1684139628/MU-2-low_aaf6nk.jpg"
                   width={282}
                   height={218}
                   alt="puntos"
@@ -89,7 +89,7 @@ const Home = () => {
                 sx={{ gridArea: "image3", display: { xs: "none", md: "flex" } }}
               >
                 <Image
-                  src="https://res.cloudinary.com/djtf4beq7/image/upload/v1684047787/MU-3_zafhme.jpg"
+                  src="https://res.cloudinary.com/djtf4beq7/image/upload/v1684139627/MU-3-low_tvs6tc.jpg"
                   width={282}
                   height={218}
                   alt="puntos"
@@ -100,7 +100,7 @@ const Home = () => {
                 sx={{ gridArea: "image4", display: { xs: "none", md: "flex" } }}
               >
                 <Image
-                  src="https://res.cloudinary.com/djtf4beq7/image/upload/v1684047775/MU-4_euy21u.jpg"
+                  src="https://res.cloudinary.com/djtf4beq7/image/upload/v1684139629/MU-4.-low_tudr4t.jpg"
                   width={282}
                   height={218}
                   alt="puntos"
@@ -111,7 +111,7 @@ const Home = () => {
                 sx={{ gridArea: "image5", display: { xs: "none", md: "flex" } }}
               >
                 <Image
-                  src="https://res.cloudinary.com/djtf4beq7/image/upload/v1684047773/MU-5_tmkgkh.jpg"
+                  src="https://res.cloudinary.com/djtf4beq7/image/upload/v1684139627/MU-5-low_r5hnvn.jpg"
                   width={282}
                   height={218}
                   alt="puntos"

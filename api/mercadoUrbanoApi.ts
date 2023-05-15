@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const mercadoUrbanoApi = axios.create({
-  baseURL: "http://localhost:3001/api",
+  baseURL: "http://187.157.11.227:8003/api",
 });
 
 export default mercadoUrbanoApi;
