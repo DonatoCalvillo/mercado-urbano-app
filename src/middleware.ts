@@ -13,7 +13,7 @@ export async function middleware(req: NextRequest) {
 
   try {
     const data = await fetch(
-      "http://187.157.11.227:8003/api/auth/validateToken",
+      "https://mercado-urbano-api-2-1vrhzayo1-donatocalvillo.vercel.app/api/auth/validateToken",
       {
         method: "GET",
         mode: "cors",
