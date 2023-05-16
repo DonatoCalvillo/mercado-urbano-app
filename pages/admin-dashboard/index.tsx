@@ -7,7 +7,7 @@ import { InfoProfile } from "components/ui";
 
 import { AdminDashboardTable } from "components/ui/AdminDashboardTable";
 import { useState } from "react";
-import { IUsuarioListado } from "../../../interfaces/IUsuario";
+import { IUsuarioListado } from "../../interfaces/IUsuario";
 
 interface Props {
   usuarios: IUsuarioListado[];

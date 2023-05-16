@@ -25,7 +25,7 @@ import SignIn from "../../../../public/icons/signin.svg";
 import { IUsuarioRegistro } from "interfaces";
 import { mercadoUrbanoApi } from "api";
 import axios from "axios";
-import { IUsuarioNuevo } from "../../../../interfaces/IUsuario";
+import { IUsuarioNuevo } from "../../../interfaces/IUsuario";
 import Cookies from "js-cookie";
 
 type FormData = {

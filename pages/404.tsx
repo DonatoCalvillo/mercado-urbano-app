@@ -1,5 +1,5 @@
 import { Box, Button, Container, Typography } from "@mui/material";
-import { UserLayout } from "../../components/layouts/UserLayout";
+import { UserLayout } from "../components/layouts/UserLayout";
 import Image from "next/image";
 import Image404 from "../../public/icons/Image404.svg";
 

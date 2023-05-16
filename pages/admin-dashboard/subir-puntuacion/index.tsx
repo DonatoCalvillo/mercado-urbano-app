@@ -18,7 +18,7 @@ import saveAs from "file-saver";
 import Cookies from "js-cookie";
 import React, { ChangeEvent, FC, useEffect, useRef } from "react";
 import { useState } from "react";
-import { IEventos } from "../../../../interfaces/IEvento";
+import { IEventos } from "../../../interfaces/IEvento";
 
 interface Props {
   eventos: IEventos[];

@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 import { AuthLayout } from "components/layouts/AuthLayout";
 import { ErrorOutline } from "@mui/icons-material";
 import { useContext, useState } from "react";
-import { AuthContext } from "../../../context/auth/AuthContext";
+import { AuthContext } from "../../context/auth/AuthContext";
 import { useRouter } from "next/router";
 
 type FormData = {
