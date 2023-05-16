@@ -1,4 +1,3 @@
-import "@/styles/globals.css";
 import { CssBaseline, ThemeProvider } from "@mui/material";
 import { AuthProvider } from "context";
 import type { AppProps } from "next/app";
