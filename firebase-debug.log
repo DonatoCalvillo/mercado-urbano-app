@@ -1,0 +1,78 @@
+[debug] [2023-05-15T23:52:03.127Z] ----------------------------------------------------------------------
+[debug] [2023-05-15T23:52:03.131Z] Command:       D:\Node\node.exe C:\Users\edgar\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js deploy
+[debug] [2023-05-15T23:52:03.132Z] CLI Version:   12.0.0
+[debug] [2023-05-15T23:52:03.133Z] Platform:      win32
+[debug] [2023-05-15T23:52:03.133Z] Node Version:  v18.12.1
+[debug] [2023-05-15T23:52:03.135Z] Time:          Mon May 15 2023 18:52:03 GMT-0500 (hora de verano central)
+[debug] [2023-05-15T23:52:03.136Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2023-05-15T23:52:03.244Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2023-05-15T23:52:03.244Z] > authorizing via signed-in user (edgardonatozd@gmail.com)
+[debug] [2023-05-15T23:52:03.245Z] [iam] checking project mercadourbano-436b3 for permissions ["firebase.projects.get","firebasehosting.sites.update"]
+[debug] [2023-05-15T23:52:03.247Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects/mercadourbano-436b3:testIamPermissions [none]
+[debug] [2023-05-15T23:52:03.247Z] >>> [apiv2][(partial)header] POST https://cloudresourcemanager.googleapis.com/v1/projects/mercadourbano-436b3:testIamPermissions x-goog-quota-user=projects/mercadourbano-436b3
+[debug] [2023-05-15T23:52:03.247Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/mercadourbano-436b3:testIamPermissions {"permissions":["firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2023-05-15T23:52:03.813Z] <<< [apiv2][status] POST https://cloudresourcemanager.googleapis.com/v1/projects/mercadourbano-436b3:testIamPermissions 200
+[debug] [2023-05-15T23:52:03.814Z] <<< [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/mercadourbano-436b3:testIamPermissions {"permissions":["firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2023-05-15T23:52:03.816Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/mercadourbano-436b3 [none]
+[debug] [2023-05-15T23:52:04.214Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/mercadourbano-436b3 200
+[debug] [2023-05-15T23:52:04.215Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/mercadourbano-436b3 {"projectId":"mercadourbano-436b3","projectNumber":"1016042246090","displayName":"MercadoUrbano","name":"projects/mercadourbano-436b3","resources":{"hostingSite":"mercadourbano-436b3"},"state":"ACTIVE","etag":"1_14c77a71-9ae2-4b70-860b-1de6299ae379"}
+[debug] [2023-05-15T23:54:14.802Z] Error: Unable to find the next dep, try NPM installing?
+    at getConfig (C:\Users\edgar\AppData\Roaming\npm\node_modules\firebase-tools\lib\frameworks\next\index.js:381:19)
+    at ɵcodegenFunctionsDirectory (C:\Users\edgar\AppData\Roaming\npm\node_modules\firebase-tools\lib\frameworks\next\index.js:296:41)
+    at prepareFrameworks (C:\Users\edgar\AppData\Roaming\npm\node_modules\firebase-tools\lib\frameworks\index.js:272:117)
+    at async deploy (C:\Users\edgar\AppData\Roaming\npm\node_modules\firebase-tools\lib\deploy\index.js:55:13)
+[error] 
+[error] Error: An unexpected error has occurred.
+[debug] [2023-05-15T23:56:31.763Z] ----------------------------------------------------------------------
+[debug] [2023-05-15T23:56:31.765Z] Command:       D:\Node\node.exe C:\Users\edgar\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js deploy
+[debug] [2023-05-15T23:56:31.765Z] CLI Version:   12.0.0
+[debug] [2023-05-15T23:56:31.766Z] Platform:      win32
+[debug] [2023-05-15T23:56:31.766Z] Node Version:  v18.12.1
+[debug] [2023-05-15T23:56:31.767Z] Time:          Mon May 15 2023 18:56:31 GMT-0500 (hora de verano central)
+[debug] [2023-05-15T23:56:31.767Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2023-05-15T23:56:31.837Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2023-05-15T23:56:31.837Z] > authorizing via signed-in user (edgardonatozd@gmail.com)
+[debug] [2023-05-15T23:56:31.838Z] [iam] checking project mercadourbano-436b3 for permissions ["firebase.projects.get","firebasehosting.sites.update"]
+[debug] [2023-05-15T23:56:31.840Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects/mercadourbano-436b3:testIamPermissions [none]
+[debug] [2023-05-15T23:56:31.840Z] >>> [apiv2][(partial)header] POST https://cloudresourcemanager.googleapis.com/v1/projects/mercadourbano-436b3:testIamPermissions x-goog-quota-user=projects/mercadourbano-436b3
+[debug] [2023-05-15T23:56:31.840Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/mercadourbano-436b3:testIamPermissions {"permissions":["firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2023-05-15T23:56:32.216Z] <<< [apiv2][status] POST https://cloudresourcemanager.googleapis.com/v1/projects/mercadourbano-436b3:testIamPermissions 200
+[debug] [2023-05-15T23:56:32.216Z] <<< [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/mercadourbano-436b3:testIamPermissions {"permissions":["firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2023-05-15T23:56:32.219Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/mercadourbano-436b3 [none]
+[debug] [2023-05-15T23:56:32.801Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/mercadourbano-436b3 200
+[debug] [2023-05-15T23:56:32.802Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/mercadourbano-436b3 {"projectId":"mercadourbano-436b3","projectNumber":"1016042246090","displayName":"MercadoUrbano","name":"projects/mercadourbano-436b3","resources":{"hostingSite":"mercadourbano-436b3"},"state":"ACTIVE","etag":"1_14c77a71-9ae2-4b70-860b-1de6299ae379"}
+[debug] [2023-05-15T23:58:32.480Z] Error: Command failed: npm i --omit dev --no-audit
+    at checkExecSyncError (node:child_process:871:11)
+    at execSync (node:child_process:943:15)
+    at prepareFrameworks (C:\Users\edgar\AppData\Roaming\npm\node_modules\firebase-tools\lib\frameworks\index.js:348:42)
+    at async deploy (C:\Users\edgar\AppData\Roaming\npm\node_modules\firebase-tools\lib\deploy\index.js:55:13)
+[error] 
+[error] Error: An unexpected error has occurred.
+[debug] [2023-05-16T00:01:40.352Z] ----------------------------------------------------------------------
+[debug] [2023-05-16T00:01:40.355Z] Command:       D:\Node\node.exe C:\Users\edgar\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js deploy
+[debug] [2023-05-16T00:01:40.355Z] CLI Version:   12.0.0
+[debug] [2023-05-16T00:01:40.356Z] Platform:      win32
+[debug] [2023-05-16T00:01:40.356Z] Node Version:  v18.12.1
+[debug] [2023-05-16T00:01:40.357Z] Time:          Mon May 15 2023 19:01:40 GMT-0500 (hora de verano central)
+[debug] [2023-05-16T00:01:40.357Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2023-05-16T00:01:40.460Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2023-05-16T00:01:40.461Z] > authorizing via signed-in user (edgardonatozd@gmail.com)
+[debug] [2023-05-16T00:01:40.461Z] [iam] checking project mercadourbano-436b3 for permissions ["firebase.projects.get","firebasehosting.sites.update"]
+[debug] [2023-05-16T00:01:40.464Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects/mercadourbano-436b3:testIamPermissions [none]
+[debug] [2023-05-16T00:01:40.465Z] >>> [apiv2][(partial)header] POST https://cloudresourcemanager.googleapis.com/v1/projects/mercadourbano-436b3:testIamPermissions x-goog-quota-user=projects/mercadourbano-436b3
+[debug] [2023-05-16T00:01:40.465Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/mercadourbano-436b3:testIamPermissions {"permissions":["firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2023-05-16T00:01:40.971Z] <<< [apiv2][status] POST https://cloudresourcemanager.googleapis.com/v1/projects/mercadourbano-436b3:testIamPermissions 200
+[debug] [2023-05-16T00:01:40.972Z] <<< [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/mercadourbano-436b3:testIamPermissions {"permissions":["firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2023-05-16T00:01:40.973Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/mercadourbano-436b3 [none]
+[debug] [2023-05-16T00:01:41.429Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/mercadourbano-436b3 200
+[debug] [2023-05-16T00:01:41.429Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/mercadourbano-436b3 {"projectId":"mercadourbano-436b3","projectNumber":"1016042246090","displayName":"MercadoUrbano","name":"projects/mercadourbano-436b3","resources":{"hostingSite":"mercadourbano-436b3"},"state":"ACTIVE","etag":"1_14c77a71-9ae2-4b70-860b-1de6299ae379"}
+[debug] [2023-05-16T00:05:10.254Z] Error: Command failed: npm i --omit dev --no-audit
+    at checkExecSyncError (node:child_process:871:11)
+    at execSync (node:child_process:943:15)
+    at prepareFrameworks (C:\Users\edgar\AppData\Roaming\npm\node_modules\firebase-tools\lib\frameworks\index.js:348:42)
+    at async deploy (C:\Users\edgar\AppData\Roaming\npm\node_modules\firebase-tools\lib\deploy\index.js:55:13)
+[error] 
+[error] Error: An unexpected error has occurred.
