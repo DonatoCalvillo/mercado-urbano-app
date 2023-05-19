@@ -12,6 +12,7 @@ import Image from "next/image";
 import mercadoUrbanoApi from "../../../api/mercadoUrbanoApi";
 import Cookies from "js-cookie";
 import { IUserHistory } from "../../../interfaces/IUsuario";
+import CloseIcon from "@mui/icons-material/Close";
 
 const columns: GridColDef[] = [
   { field: "matricula", headerName: "Matricula", width: 200 },
@@ -216,9 +217,7 @@ export const ListUsers: FC<Props> = ({}) => {
                   {`${selectedUser?.apellido_paterno} ${selectedUser?.apellido_materno} ${selectedUser?.nombre}`}
                 </Typography>
                 <Box onClick={() => handleClose()}>
-                  <DoNotDisturbOnIcon
-                    style={{ color: "#F89832", cursor: "pointer" }}
-                  />
+                  <CloseIcon style={{ color: "red", cursor: "pointer" }} />
                 </Box>
               </Box>
               <Typography
