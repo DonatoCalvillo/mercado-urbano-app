@@ -2,7 +2,15 @@ import * as React from "react";
 import { DataGrid, GridColDef, GridRowId } from "@mui/x-data-grid";
 import { IUsuarioListado } from "interfaces";
 import { FC, useEffect, useState } from "react";
-import { Avatar, Box, Button, Grid, Modal, Typography } from "@mui/material";
+import {
+  Avatar,
+  Box,
+  Button,
+  Grid,
+  Modal,
+  Stack,
+  Typography,
+} from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import DoNotDisturbOnIcon from "@mui/icons-material/DoNotDisturbOn";
 
@@ -41,6 +49,7 @@ export const ListUsers: FC<Props> = ({}) => {
   const [selectedUser, setSelectedUser] = useState<IUsuarioListado>();
   const [userHistory, setUserHistory] = useState<IUserHistory[]>([]);
   const [usuarios, setUsuarios] = useState<IUsuarioListado[]>([]);
+  const [sureDelete, setSureDelete] = useState<boolean>(false);
 
   const classes = useStyles();
 
@@ -280,7 +289,7 @@ export const ListUsers: FC<Props> = ({}) => {
           </Box>
           <Box display="flex" justifyContent="right" marginTop="20px">
             <Button
-              onClick={deleteUser}
+              onClick={() => setSureDelete(true)}
               color="error"
               variant="outlined"
               style={{
@@ -291,6 +300,78 @@ export const ListUsers: FC<Props> = ({}) => {
             </Button>
           </Box>
           <HistoryUser userHistory={userHistory} />
+        </Box>
+      </Modal>
+
+      <Modal
+        open={sureDelete}
+        // onClose={handleClose}
+        aria-labelledby="nuevo-usuario"
+        aria-describedby="modal-modal-description"
+      >
+        <Box
+          position="absolute"
+          display="flex"
+          justifyContent="center"
+          flexDirection="column"
+          top="50%"
+          left="50%"
+          width="1500px"
+          sx={{
+            width: {
+              lg: "500px",
+              md: "500px",
+              sm: "500px",
+              xs: "100%",
+            },
+          }}
+          style={{
+            transform: "translate(-50%, -50%)",
+            boxShadow: "24",
+            background: "#ffffff",
+            padding: "50px",
+          }}
+        >
+          <Box
+            onClick={() => setSureDelete(false)}
+            display="flex"
+            justifyContent="right"
+          >
+            <CloseIcon
+              style={{
+                color: "red",
+              }}
+            />
+          </Box>
+
+          <Typography
+            fontWeight="800"
+            fontSize="16px"
+            variant="h3"
+            marginTop="10px"
+            color="#707070"
+            textAlign="center"
+            marginBottom="10px"
+          >
+            ¿Estas seguro de borrar el usuario seleccionado?
+          </Typography>
+          <Stack
+            display="flex"
+            justifyContent="center"
+            direction="row"
+            spacing={2}
+          >
+            <Button
+              onClick={() => setSureDelete(false)}
+              variant="outlined"
+              color="error"
+            >
+              CANCELAR
+            </Button>
+            <Button onClick={deleteUser} variant="outlined" color="success">
+              CONFIRMAR
+            </Button>
+          </Stack>
         </Box>
       </Modal>
     </>
