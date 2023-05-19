@@ -214,6 +214,14 @@ const ChangePassword = () => {
                 fontSize="16px"
                 fontStyle="italic"
               >
+                Seis caracteres
+              </Typography>
+              <Typography
+                variant="h2"
+                component="h2"
+                fontSize="16px"
+                fontStyle="italic"
+              >
                 Una mayuscula
               </Typography>
               <Typography
