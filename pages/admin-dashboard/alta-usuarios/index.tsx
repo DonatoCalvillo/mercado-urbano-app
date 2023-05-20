@@ -235,8 +235,8 @@ const AltaUsuarios = () => {
                           {...register("apellido_paterno", {
                             required: "Este campo es requerido.",
                             minLength: {
-                              value: 4,
-                              message: "Minimo 4 caracteres.",
+                              value: 2,
+                              message: "Minimo 2 caracteres.",
                             },
                           })}
                           error={!!errors.apellido_paterno}
@@ -253,8 +253,8 @@ const AltaUsuarios = () => {
                           {...register("apellido_materno", {
                             required: "Este campo es requerido.",
                             minLength: {
-                              value: 6,
-                              message: "Minimo 6 caracteres.",
+                              value: 2,
+                              message: "Minimo 2 caracteres.",
                             },
                           })}
                           error={!!errors.apellido_materno}
