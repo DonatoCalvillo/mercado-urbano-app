@@ -1,4 +1,5 @@
-import { NextRequest, NextResponse } from "next/server";
+import { NextResponse } from "next/server";
+import type { NextRequest } from "next/server";
 
 export enum ValidRoles {
   admin = "Administrador",
@@ -6,7 +7,7 @@ export enum ValidRoles {
   user = "Usuario",
 }
 
-export async function middleware(req: NextRequest) {
+export default async function middleware(req: NextRequest) {
   return NextResponse.json({ hola: "hola" });
   const currentToken: string | undefined = req.cookies.get("token")?.value;
 
