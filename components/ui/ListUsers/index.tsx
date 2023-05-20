@@ -60,14 +60,11 @@ export const ListUsers: FC<Props> = ({}) => {
   useEffect(() => {
     const getAllUsers = async () => {
       const token = Cookies.get("token");
-      const { data } = await mercadoUrbanoApi.get<IUsuarioListado[]>(
-        "/user/getAll?limit=100",
-        {
-          headers: { Authorization: `bearer ${token}` },
-        }
-      );
-
-      setUsuarios(data);
+      const { data } = await mercadoUrbanoApi.get("/user/getAll?limit=100", {
+        headers: { Authorization: `bearer ${token}` },
+      });
+      console.log(data);
+      setUsuarios(data.data);
     };
 
     getAllUsers();
@@ -75,9 +72,9 @@ export const ListUsers: FC<Props> = ({}) => {
 
   const historyOnClick = async () => {
     const _selectedUser = usuarios.find(
-      (usuario) => usuario.matricula === selectionModel.toString()
+      (usuario) => usuario.id === selectionModel.toString()
     );
-
+    console.log(usuarios);
     if (!_selectedUser) return;
 
     setSelectedUser(_selectedUser);
@@ -134,7 +131,7 @@ export const ListUsers: FC<Props> = ({}) => {
           <DataGrid
             className={classes.root}
             rows={usuarios.map((usuario, index) => {
-              return { id: usuario.matricula, ...usuario };
+              return { ...usuario };
             })}
             columns={columns}
             pageSize={10}

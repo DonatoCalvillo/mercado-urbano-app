@@ -10,6 +10,7 @@ export interface IUsuario {
 }
 
 export interface IUsuarioListado {
+  id: string;
   nombre: string;
   apellido_paterno: string;
   apellido_materno: string;
