@@ -7,7 +7,7 @@ export enum ValidRoles {
 }
 
 export async function middleware(req: NextRequest) {
-  console.log("Entre al middleware");
+  alert("Entre al middleware");
   const currentToken: string | undefined = req.cookies.get("token")?.value;
 
   if (!currentToken) return NextResponse.redirect(new URL("/auth", req.url));
