@@ -106,13 +106,16 @@ export const Zone: FC<Props> = ({
       }
 
       setSnackMessage(message);
+
+      if (status !== "OK") {
+        alert("HOla");
+      }
+
       setStatusMessage(status);
-
       handleClick();
-
-      console.log(data);
     } catch (error) {
-      console.log(error);
+      setSnackMessage("Lugar ocupado, porfavor selecciona otro");
+      setStatusMessage("FAIL");
     }
   };
 

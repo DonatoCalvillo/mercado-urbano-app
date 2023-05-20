@@ -6,7 +6,8 @@ export enum ValidRoles {
   user = "Usuario",
 }
 
-export async function middleware(req: NextRequest) {
+export async function middleware(req: NextRequest, res: NextResponse) {
+  console.log("Entre al middleware");
   const currentToken: string | undefined = req.cookies.get("token")?.value;
 
   if (!currentToken) return NextResponse.redirect(new URL("/auth", req.url));
@@ -31,7 +32,8 @@ export async function middleware(req: NextRequest) {
     const { rol_nombre } = usuario;
 
     const url = req.nextUrl.clone();
-    console.log(rol_nombre);
+    console.log(url);
+    console.log(req.nextUrl.pathname.startsWith("/change-password"));
     if (req.nextUrl.pathname.startsWith("/change-password"))
       return NextResponse.rewrite(new URL("/change-password", req.url));
 
