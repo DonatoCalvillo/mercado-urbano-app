@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { UserLayout } from "components/layouts";
 import {
   Alert,
@@ -27,6 +27,7 @@ import { mercadoUrbanoApi } from "api";
 import axios from "axios";
 import { IUsuarioNuevo } from "../../../interfaces/IUsuario";
 import Cookies from "js-cookie";
+import { AuthContext } from "context";
 
 type FormData = {
   nombre: string;
@@ -44,6 +45,7 @@ const AltaUsuarios = () => {
   const [openAlert, setOpenAlert] = useState(false);
   const [snackMessage, setSnackMessage] = useState("");
   const [statusMessage, setStatusMessage] = useState(false);
+  const { user } = useContext(AuthContext);
 
   const {
     register,
@@ -100,6 +102,9 @@ const AltaUsuarios = () => {
 
       if (correo != "") sendData = { ...sendData, correo };
 
+      if (rol == "Administrador") area = "Administrador";
+
+      console.log(sendData);
       try {
         const { data } = await mercadoUrbanoApi.post(
           "/auth/register",
@@ -304,39 +309,6 @@ const AltaUsuarios = () => {
                       <Grid item xs={12}>
                         <FormControl fullWidth>
                           <InputLabel
-                            id="area-label"
-                            onChange={handleInputChange}
-                          >
-                            Área*
-                          </InputLabel>
-                          <Select
-                            fullWidth
-                            labelId="area-label"
-                            id="area-label"
-                            label="Zona"
-                            {...register("area", {
-                              required: true,
-                            })}
-                            error={!!errors.area}
-                            onChange={handleInputChange}
-                          >
-                            <MenuItem value="Administrador">
-                              Administrativo
-                            </MenuItem>
-                            <MenuItem value="Gastronomia">Gastronomía</MenuItem>
-                            <MenuItem value="Comercio">Comercio</MenuItem>
-                          </Select>
-                          {errors.area && (
-                            <FormHelperText>
-                              Este campo es requerido.
-                            </FormHelperText>
-                          )}
-                        </FormControl>
-                      </Grid>
-
-                      <Grid item xs={12}>
-                        <FormControl fullWidth>
-                          <InputLabel
                             id="rol-label"
                             onChange={handleInputChange}
                           >
@@ -353,9 +325,11 @@ const AltaUsuarios = () => {
                             error={!!errors.area}
                             onChange={handleInputChange}
                           >
-                            <MenuItem value="Administrador">
-                              Administrador
-                            </MenuItem>
+                            {user?.rol_nombre === "SuperAdministrador" && (
+                              <MenuItem value="Administrador">
+                                Administrador
+                              </MenuItem>
+                            )}
                             <MenuItem value="Usuario">Usuario</MenuItem>
                           </Select>
                           {errors.area && (
@@ -365,6 +339,40 @@ const AltaUsuarios = () => {
                           )}
                         </FormControl>
                       </Grid>
+
+                      {userData.rol !== "Administrador" && (
+                        <Grid item xs={12}>
+                          <FormControl fullWidth>
+                            <InputLabel
+                              id="area-label"
+                              onChange={handleInputChange}
+                            >
+                              Área*
+                            </InputLabel>
+                            <Select
+                              fullWidth
+                              labelId="area-label"
+                              id="area-label"
+                              label="Zona"
+                              {...register("area", {
+                                required: true,
+                              })}
+                              error={!!errors.area}
+                              onChange={handleInputChange}
+                            >
+                              <MenuItem value="Gastronomia">
+                                Gastronomía
+                              </MenuItem>
+                              <MenuItem value="Comercio">Comercio</MenuItem>
+                            </Select>
+                            {errors.area && (
+                              <FormHelperText>
+                                Este campo es requerido.
+                              </FormHelperText>
+                            )}
+                          </FormControl>
+                        </Grid>
+                      )}
 
                       <Grid item xs={12}>
                         <Button
@@ -544,7 +552,12 @@ const AltaUsuarios = () => {
             <Box marginTop="20px" display="flex" justifyContent="space-between">
               <Button
                 style={{ marginRight: "10px" }}
-                onClick={handleClose}
+                onClick={() => {
+                  setSnackMessage(
+                    "Esta funcionalidad esta próxima a su despliegue."
+                  );
+                  setOpenAlert(true);
+                }}
                 color="success"
                 variant="outlined"
                 type="submit"
