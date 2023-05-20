@@ -64,6 +64,6 @@ export default async function middleware(req: NextRequest) {
   }
 }
 
-export const config = {
-  matcher: ["/user-dashboard", "/admin-dashboard/:path*", "/change-password"],
-};
+// export const config = {
+//   matcher: ["/user-dashboard", "/admin-dashboard/:path*", "/change-password"],
+// };
