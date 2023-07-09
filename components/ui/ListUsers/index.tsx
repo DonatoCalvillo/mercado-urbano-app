@@ -7,8 +7,10 @@ import {
   Box,
   Button,
   Grid,
+  Input,
   Modal,
   Stack,
+  TextField,
   Typography,
 } from "@mui/material";
 import { makeStyles } from "@mui/styles";
@@ -21,6 +23,10 @@ import mercadoUrbanoApi from "../../../api/mercadoUrbanoApi";
 import Cookies from "js-cookie";
 import { IUserHistory } from "../../../interfaces/IUsuario";
 import CloseIcon from "@mui/icons-material/Close";
+import EditIcon from "@mui/icons-material/Edit";
+import DeleteIcon from "@mui/icons-material/Delete";
+import CheckCircleIcon from "@mui/icons-material/CheckCircle";
+import CancelIcon from "@mui/icons-material/Cancel";
 
 const columns: GridColDef[] = [
   { field: "matricula", headerName: "Matricula", width: 200 },
@@ -50,6 +56,7 @@ export const ListUsers: FC<Props> = ({}) => {
   const [userHistory, setUserHistory] = useState<IUserHistory[]>([]);
   const [usuarios, setUsuarios] = useState<IUsuarioListado[]>([]);
   const [sureDelete, setSureDelete] = useState<boolean>(false);
+  const [isEditing, setIsEditing] = useState<boolean>(false);
 
   const classes = useStyles();
 
@@ -214,14 +221,45 @@ export const ListUsers: FC<Props> = ({}) => {
                 alignItems="center"
                 justifyContent="space-between"
               >
-                <Typography
-                  fontSize="22px"
-                  variant="h2"
-                  marginTop="10px"
-                  color="#707070"
-                >
-                  {`${selectedUser?.apellido_paterno} ${selectedUser?.apellido_materno} ${selectedUser?.nombre}`}
-                </Typography>
+                {isEditing ? (
+                  <>
+                    <TextField
+                      label="Apellido paterno"
+                      defaultValue={
+                        selectedUser?.apellido_paterno
+                          ? selectedUser?.apellido_paterno
+                          : "N/E"
+                      }
+                      variant="outlined"
+                    />
+                    <TextField
+                      label="Apellido materno"
+                      defaultValue={
+                        selectedUser?.apellido_materno
+                          ? selectedUser?.apellido_materno
+                          : "N/E"
+                      }
+                      variant="outlined"
+                    />
+                    <TextField
+                      label="Nombre"
+                      defaultValue={
+                        selectedUser?.nombre ? selectedUser?.nombre : "N/E"
+                      }
+                      variant="outlined"
+                    />
+                  </>
+                ) : (
+                  <Typography
+                    fontSize="22px"
+                    variant="h2"
+                    marginTop="10px"
+                    color="#707070"
+                  >
+                    {`${selectedUser?.apellido_paterno} ${selectedUser?.apellido_materno} ${selectedUser?.nombre}`}
+                  </Typography>
+                )}
+
                 <Box onClick={() => handleClose()}>
                   <CloseIcon style={{ color: "red", cursor: "pointer" }} />
                 </Box>
@@ -247,7 +285,7 @@ export const ListUsers: FC<Props> = ({}) => {
                   variant="h6"
                   fontSize="20px"
                   fontWeight="100"
-                  marginLeft="5px"
+                  margin="10px 0"
                   color="#707070"
                 >
                   {selectedUser?.puntos} puntos
@@ -260,41 +298,98 @@ export const ListUsers: FC<Props> = ({}) => {
                 justifyContent="space-between"
               >
                 <Grid item xs={12} sm={12} md={6} lg={6}>
-                  <Typography
-                    fontWeight="100"
-                    fontSize="16px"
-                    variant="h3"
-                    marginTop="10px"
-                    color="#707070"
-                  >
-                    {selectedUser?.correo ? selectedUser?.correo : "N/E"}
-                  </Typography>
+                  {isEditing ? (
+                    <TextField
+                      label="Correo"
+                      defaultValue={
+                        selectedUser?.correo ? selectedUser?.correo : "N/E"
+                      }
+                      variant="outlined"
+                    />
+                  ) : (
+                    <Typography
+                      fontWeight="100"
+                      fontSize="16px"
+                      variant="h3"
+                      marginTop="10px"
+                      color="#707070"
+                    >
+                      {selectedUser?.correo ? selectedUser?.correo : "N/E"}
+                    </Typography>
+                  )}
                 </Grid>
                 <Grid item xs={12} sm={12} md={6} lg={6}>
-                  <Typography
-                    fontWeight="100"
-                    fontSize="16px"
-                    variant="h3"
-                    marginTop="10px"
-                    color="#707070"
-                  >
-                    {selectedUser?.telefono ? selectedUser?.telefono : "N/E"}
-                  </Typography>
+                  {isEditing ? (
+                    <TextField
+                      label="Telefono"
+                      defaultValue={
+                        selectedUser?.telefono ? selectedUser?.telefono : "N/E"
+                      }
+                      variant="outlined"
+                    />
+                  ) : (
+                    <Typography
+                      fontWeight="100"
+                      fontSize="16px"
+                      variant="h3"
+                      marginTop="10px"
+                      color="#707070"
+                    >
+                      {selectedUser?.telefono ? selectedUser?.telefono : "N/E"}
+                    </Typography>
+                  )}
                 </Grid>
               </Grid>
             </Box>
           </Box>
           <Box display="flex" justifyContent="right" marginTop="20px">
-            <Button
-              onClick={() => setSureDelete(true)}
-              color="error"
-              variant="outlined"
-              style={{
-                margin: "10px 0",
-              }}
-            >
-              Eliminar
-            </Button>
+            {isEditing ? (
+              <>
+                <Button
+                  onClick={() => setIsEditing(!isEditing)}
+                  color="success"
+                  variant="outlined"
+                  style={{
+                    margin: "10px 10px",
+                  }}
+                >
+                  <CheckCircleIcon style={{ marginRight: "5px" }} /> Aceptar
+                </Button>
+                <Button
+                  onClick={() => setSureDelete(true)}
+                  color="error"
+                  variant="outlined"
+                  style={{
+                    margin: "10px 0", 
+                  }}
+                >
+                  <CancelIcon style={{ marginRight: "5px" }} /> Cancelar
+                </Button>
+              </>
+            ) : (
+              <>
+                <Button
+                  onClick={() => setIsEditing(!isEditing)}
+                  color="info"
+                  variant="outlined"
+                  style={{
+                    margin: "10px 10px",
+                  }}
+                >
+                  <EditIcon style={{ marginRight: "5px" }} /> Editar
+                </Button>
+                <Button
+                  onClick={() => setSureDelete(true)}
+                  color="error"
+                  variant="outlined"
+                  style={{
+                    margin: "10px 0",
+                  }}
+                >
+                  <DeleteIcon style={{ marginRight: "5px" }} /> Eliminar
+                </Button>
+              </>
+            )}
           </Box>
           <HistoryUser userHistory={userHistory} />
         </Box>
